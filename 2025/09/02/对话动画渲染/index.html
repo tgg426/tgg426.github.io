@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"localhost","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="LLM 流式回复：动画与微交互手册引言在大模型对话类应用中，良好的流式反馈不仅提升“响应速度”的体感，还能显著降低阅读负担与界面抖动。本文整理了常用的动画&#x2F;微交互清单，并提供贴合 Vue 3 的示例代码。  🧭 动画与微交互清单 基础反馈 脉冲&#x2F;波纹加载点: 在消息气泡内显示呼吸式圆点，表示正在生成。    12345678910&lt;!-- ChatWindow.vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LLM 流式回复的动画与交互">
+<meta property="og:url" content="http://localhost:4000/2025/09/02/%E5%AF%B9%E8%AF%9D%E5%8A%A8%E7%94%BB%E6%B8%B2%E6%9F%93/index.html">
+<meta property="og:site_name" content="TGG的博客">
+<meta property="og:description" content="LLM 流式回复：动画与微交互手册引言在大模型对话类应用中，良好的流式反馈不仅提升“响应速度”的体感，还能显著降低阅读负担与界面抖动。本文整理了常用的动画&#x2F;微交互清单，并提供贴合 Vue 3 的示例代码。  🧭 动画与微交互清单 基础反馈 脉冲&#x2F;波纹加载点: 在消息气泡内显示呼吸式圆点，表示正在生成。    12345678910&lt;!-- ChatWindow.vue">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-09-02T06:00:00.000Z">
+<meta property="article:modified_time" content="2025-10-28T11:16:41.564Z">
+<meta property="article:author" content="TGG">
+<meta property="article:tag" content="前端">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://localhost:4000/2025/09/02/%E5%AF%B9%E8%AF%9D%E5%8A%A8%E7%94%BB%E6%B8%B2%E6%9F%93/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>LLM 流式回复的动画与交互 | TGG的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TGG的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome && Congratulations</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">10</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/tgg426" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2025/09/02/%E5%AF%B9%E8%AF%9D%E5%8A%A8%E7%94%BB%E6%B8%B2%E6%9F%93/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="TGG">
+      <meta itemprop="description" content="一名立志成为全栈工程师的程序媛">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGG的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          LLM 流式回复的动画与交互
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-09-02 14:00:00" itemprop="dateCreated datePublished" datetime="2025-09-02T14:00:00+08:00">2025-09-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-28 19:16:41" itemprop="dateModified" datetime="2025-10-28T19:16:41+08:00">2025-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url" rel="index"><span itemprop="name">前端</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="LLM-流式回复：动画与微交互手册"><a href="#LLM-流式回复：动画与微交互手册" class="headerlink" title="LLM 流式回复：动画与微交互手册"></a>LLM 流式回复：动画与微交互手册</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在大模型对话类应用中，良好的流式反馈不仅提升“响应速度”的体感，还能显著降低阅读负担与界面抖动。本文整理了常用的动画&#x2F;微交互清单，并提供贴合 Vue 3 的示例代码。</p>
+<hr>
+<h2 id="🧭-动画与微交互清单"><a href="#🧭-动画与微交互清单" class="headerlink" title="🧭 动画与微交互清单"></a>🧭 动画与微交互清单</h2><ul>
+<li><strong>基础反馈</strong><ul>
+<li><strong>脉冲&#x2F;波纹加载点</strong>: 在消息气泡内显示呼吸式圆点，表示正在生成。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- ChatWindow.vue 片段 --&gt;</span><br><span class="line">&lt;div class=&quot;ai-message&quot;&gt;</span><br><span class="line">  &lt;div v-html=&quot;marked(item.content)&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;loading-circle&quot; v-if=&quot;item.loadingCircle&quot;&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.loading-circle &#123; width: 12px; height: 12px; background: #3a71e8; border-radius: 50%; animation: pulse 1.6s ease-in-out infinite; &#125;</span><br><span class="line">@keyframes pulse &#123; 0%,100%&#123; transform: scale(1);&#125; 50%&#123; transform: scale(1.25);&#125; &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>打字光标闪烁</strong>: 在末尾显示“|”光标，随内容增长持续闪烁。</li>
+</ul>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;ai-message&quot;&gt;</span><br><span class="line">  &lt;div v-html=&quot;marked(item.content)&quot;&gt;&lt;/div&gt;</span><br><span class="line">  &lt;span v-if=&quot;item.loadingCircle&quot; class=&quot;caret&quot;&gt;|&lt;/span&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.caret &#123; margin-left: 2px; animation: blink 1s steps(1) infinite; &#125;</span><br><span class="line">@keyframes blink &#123; 50% &#123; opacity: 0; &#125; &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>文本出现方式</strong><ul>
+<li><strong>逐字&#x2F;逐词显现</strong>: token 到达即追加，配合轻微淡入（opacity&#x2F;translateY）。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在流式读取时做轻微节流，批量写入</span></span><br><span class="line"><span class="keyword">let</span> buffer = <span class="string">&quot;&quot;</span>; <span class="keyword">let</span> <span class="attr">rafId</span>: <span class="built_in">number</span> | <span class="literal">null</span> = <span class="literal">null</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">scheduleFlush</span>(<span class="params"><span class="attr">aiMessageObj</span>: <span class="built_in">any</span></span>) &#123;</span><br><span class="line">  <span class="keyword">if</span> (rafId) <span class="keyword">return</span>;</span><br><span class="line">  rafId = <span class="title function_">requestAnimationFrame</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">    aiMessageObj.<span class="property">content</span> += buffer; buffer = <span class="string">&quot;&quot;</span>; rafId = <span class="literal">null</span>;</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 收到分片</span></span><br><span class="line">buffer += aiMessage.<span class="property">content</span>; <span class="title function_">scheduleFlush</span>(aiMessageObj);</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 全局样式：新文本自然淡入（依赖浏览器合成层） */</span></span><br><span class="line"><span class="selector-class">.ai-message</span> &#123; <span class="attribute">will-change</span>: contents; &#125;</span><br><span class="line"><span class="selector-class">.ai-message</span> * &#123; <span class="attribute">transition</span>: opacity .<span class="number">18s</span> ease, transform .<span class="number">18s</span> ease; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>行级渐显</strong>: 按换行分段淡入，降低频繁重排带来的抖动。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;transition-group name=&quot;line&quot; tag=&quot;div&quot;&gt;</span><br><span class="line">    &lt;div v-for=&quot;(line, i) in lines&quot; :key=&quot;i&quot;&gt;&#123;&#123; line &#125;&#125;&lt;/div&gt;</span><br><span class="line">  &lt;/transition-group&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; computed &#125; from &#x27;vue&#x27;;</span><br><span class="line">const props = defineProps&lt;&#123; text: string &#125;&gt;();</span><br><span class="line">const lines = computed(() =&gt; props.text.split(&#x27;\n&#x27;));</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.line-enter-from &#123; opacity: 0; transform: translateY(4px); &#125;</span><br><span class="line">.line-enter-active &#123; transition: all .16s ease; &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>语句级过渡</strong>: 句号&#x2F;逗号后块级 reveal，阅读节奏更稳。</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 缓冲到句末再写入</span></span><br><span class="line">buffer += aiMessage.<span class="property">content</span>;</span><br><span class="line"><span class="keyword">const</span> parts = buffer.<span class="title function_">split</span>(<span class="regexp">/([。！？.!?])/</span>);</span><br><span class="line"><span class="keyword">const</span> <span class="attr">out</span>: <span class="built_in">string</span>[] = [];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i + <span class="number">1</span> &lt; parts.<span class="property">length</span>; i += <span class="number">2</span>) out.<span class="title function_">push</span>(parts[i] + parts[i+<span class="number">1</span>]);</span><br><span class="line"><span class="keyword">if</span> (out.<span class="property">length</span>) &#123; aiMessageObj.<span class="property">content</span> += out.<span class="title function_">join</span>(<span class="string">&quot;&quot;</span>); buffer = parts.<span class="title function_">slice</span>(out.<span class="property">length</span>*<span class="number">2</span>).<span class="title function_">join</span>(<span class="string">&quot;&quot;</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>Markdown 与代码块</strong><ul>
+<li><strong>代码块整体淡入</strong>: 块级到齐后统一显现，减少半渲染闪烁。</li>
+<li><strong>语法高亮延迟应用</strong>: 流式完成后再高亮，或节流批量高亮。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 流结束时再高亮，避免频繁 reflow</span></span><br><span class="line"><span class="keyword">import</span> <span class="title class_">Prism</span> <span class="keyword">from</span> <span class="string">&#x27;prismjs&#x27;</span>;</span><br><span class="line"><span class="comment">// done === true 时：</span></span><br><span class="line"><span class="title function_">queueMicrotask</span>(<span class="function">() =&gt;</span> <span class="title class_">Prism</span>.<span class="title function_">highlightAll</span>());</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.ai-message</span> pre &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; <span class="attribute">transition</span>: opacity .<span class="number">2s</span> ease; &#125;</span><br><span class="line"><span class="selector-class">.ai-message</span> pre<span class="selector-class">.rendered</span> &#123; <span class="attribute">opacity</span>: <span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>逐行高亮闪现</strong>: 新增行短暂背景高亮再退场，提示位置变化。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.flash</span> &#123; <span class="attribute">animation</span>: flash-bg <span class="number">1.2s</span> ease; &#125;</span><br><span class="line"><span class="keyword">@keyframes</span> flash-bg &#123; <span class="number">0%</span> &#123; <span class="attribute">background</span>: <span class="number">#fff5c2</span>; &#125; <span class="number">100%</span> &#123; <span class="attribute">background</span>: transparent; &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 每次追加新行时给该行加 .flash</span></span><br><span class="line"><span class="comment">// 选择最后一行元素并添加/移除类名</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>滚动与定位</strong><ul>
+<li><strong>首帧平滑滚动</strong>: 开始回复时滚到底部一次。</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">scrollTo</span>(&#123; <span class="attr">top</span>: <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">scrollHeight</span>, <span class="attr">behavior</span>: <span class="string">&#x27;smooth&#x27;</span> &#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>智能跟随滚动</strong>: 仅当用户在底部时自动跟随；离开底部则显示“回到底部”浮标。</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> &#123; ref, onMounted, onBeforeUnmount &#125; <span class="keyword">from</span> <span class="string">&#x27;vue&#x27;</span>;</span><br><span class="line"><span class="keyword">const</span> stickToBottom = <span class="title function_">ref</span>(<span class="literal">true</span>);</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">onScroll</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> nearBottom = <span class="variable language_">window</span>.<span class="property">innerHeight</span> + <span class="variable language_">window</span>.<span class="property">scrollY</span> &gt;= <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">scrollHeight</span> - <span class="number">8</span>;</span><br><span class="line">  stickToBottom.<span class="property">value</span> = nearBottom;</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">onMounted</span>(<span class="function">() =&gt;</span> <span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;scroll&#x27;</span>, onScroll));</span><br><span class="line"><span class="title function_">onBeforeUnmount</span>(<span class="function">() =&gt;</span> <span class="variable language_">window</span>.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;scroll&#x27;</span>, onScroll));</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">maybeFollow</span>(<span class="params"></span>) &#123; <span class="keyword">if</span> (stickToBottom.<span class="property">value</span>) <span class="variable language_">window</span>.<span class="title function_">scrollTo</span>(&#123; <span class="attr">top</span>: <span class="variable language_">document</span>.<span class="property">body</span>.<span class="property">scrollHeight</span> &#125;); &#125;</span><br><span class="line"><span class="comment">// 在每次批量写入后调用 maybeFollow()</span></span><br></pre></td></tr></table></figure></li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;button v-if=&quot;!stickToBottom&quot; class=&quot;to-bottom&quot; @click=&quot;window.scrollTo(&#123;top: document.body.scrollHeight, behavior:&#x27;smooth&#x27;&#125;)&quot;&gt;回到底部&lt;/button&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>新内容定位提示</strong>: 当用户回到底部时，对最新 token 进行短暂高亮。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.new-token</span> &#123; <span class="attribute">animation</span>: glow .<span class="number">6s</span> ease; &#125;</span><br><span class="line"><span class="keyword">@keyframes</span> glow &#123; <span class="selector-tag">from</span> &#123; <span class="attribute">background</span>: <span class="number">#e8f0ff</span>; &#125; <span class="selector-tag">to</span> &#123; <span class="attribute">background</span>: transparent; &#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>来源&#x2F;检索信息（RAG）</strong><ul>
+<li><strong>可折叠来源面板</strong>: 展开&#x2F;收起过渡（height auto → max-height）。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;div :class=&quot;[&#x27;kb-panel&#x27;, &#123; open: open &#125;]&quot;&gt;</span><br><span class="line">  &lt;div class=&quot;kb-title&quot; @click=&quot;open=!open&quot;&gt;来源&lt;/div&gt;</span><br><span class="line">  &lt;div class=&quot;kb-body&quot;&gt;&lt;slot/&gt;&lt;/div&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.kb-panel .kb-body &#123; max-height: 0; overflow: hidden; transition: max-height .24s ease; &#125;</span><br><span class="line">.kb-panel.open .kb-body &#123; max-height: 320px; &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>命中文档闪现</strong>: 新增来源条目淡入并带轻微缩放。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.hit-enter</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; <span class="attribute">transform</span>: <span class="built_in">scale</span>(.<span class="number">98</span>); &#125;</span><br><span class="line"><span class="selector-class">.hit-enter-active</span> &#123; <span class="attribute">transition</span>: all .<span class="number">18s</span> ease; <span class="attribute">opacity</span>: <span class="number">1</span>; <span class="attribute">transform</span>: <span class="built_in">scale</span>(<span class="number">1</span>); &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p><strong>文本内引用 hover 高亮</strong>: 悬停引用标签，同步高亮对应来源条目。</p>
+</li>
+<li><p><strong>文件与图片回复</strong></p>
+<ul>
+<li><p><strong>缩略图占位骨架</strong>: 图片未就绪时显示灰色骨架与闪动光泽。</p>
+</li>
+<li><p><strong>图片加载淡入</strong>: onload 后从 0→1 的 opacity 过渡。</p>
+</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;thumb&quot;&gt;</span><br><span class="line">  &lt;div v-if=&quot;!loaded&quot; class=&quot;skeleton&quot;/&gt;</span><br><span class="line">  &lt;img v-show=&quot;loaded&quot; :src=&quot;src&quot; @load=&quot;loaded=true&quot; /&gt;</span><br><span class="line">&lt;/div&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; ref &#125; from &#x27;vue&#x27;;</span><br><span class="line">const props = defineProps&lt;&#123; src: string &#125;&gt;();</span><br><span class="line">const loaded = ref(false);</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">.skeleton &#123; height: 96px; width: 96px; background: linear-gradient(90deg,#eee,#f5f5f5,#eee); background-size: 200% 100%; animation: shine 1.2s linear infinite; &#125;</span><br><span class="line">@keyframes shine &#123; 0% &#123; background-position: 200% 0; &#125; 100% &#123; background-position: -200% 0; &#125; &#125;</span><br><span class="line">img &#123; opacity: 0; transition: opacity .24s ease; &#125;</span><br><span class="line">img[v-show=&quot;true&quot;] &#123; opacity: 1; &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>消息气泡与布局</strong><ul>
+<li><strong>气泡增长过渡</strong>: 内容增加时，使用 height&#x2F;transform 过渡减缓突变。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.ai-message</span> &#123; <span class="attribute">transition</span>: transform .<span class="number">12s</span> ease; &#125;</span><br><span class="line"><span class="selector-class">.ai-message</span><span class="selector-class">.growing</span> &#123; <span class="attribute">transform</span>: <span class="built_in">translateZ</span>(<span class="number">0</span>) <span class="built_in">scale</span>(<span class="number">1.001</span>); &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>时间戳&#x2F;操作区淡入</strong>: hover 或完成后显示复制、点赞等操作按钮。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.msg-tools</span> &#123; <span class="attribute">opacity</span>: <span class="number">0</span>; <span class="attribute">transition</span>: opacity .<span class="number">16s</span> ease; &#125;</span><br><span class="line"><span class="selector-class">.ai-message</span><span class="selector-pseudo">:hover</span> <span class="selector-class">.msg-tools</span> &#123; <span class="attribute">opacity</span>: <span class="number">1</span>; &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>交互微动效</strong><ul>
+<li><strong>复制成功反馈</strong>: 复制按钮触发勾号替换并回弹。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;button @click=&quot;copy(text)&quot; :class=&quot;&#123; ok: copied &#125;&quot;&gt;&#123;&#123; copied ? &#x27;✓&#x27; : &#x27;复制&#x27; &#125;&#125;&lt;/button&gt;</span><br><span class="line"></span><br><span class="line">&lt;script setup lang=&quot;ts&quot;&gt;</span><br><span class="line">import &#123; ref &#125; from &#x27;vue&#x27;;</span><br><span class="line">const props = defineProps&lt;&#123; text: string &#125;&gt;();</span><br><span class="line">const copied = ref(false);</span><br><span class="line">async function copy(t: string)&#123; await navigator.clipboard.writeText(t); copied.value = true; setTimeout(()=&gt;copied.value=false, 1000); &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">button &#123; transition: transform .12s ease; &#125;</span><br><span class="line">button.ok &#123; transform: scale(1.05); &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>停止生成按钮</strong>: 按下后显示停表&#x2F;旋转到停止的过渡。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.spin-to-stop</span> &#123; <span class="attribute">transition</span>: transform .<span class="number">2s</span> ease; &#125;</span><br><span class="line"><span class="selector-class">.spin-to-stop</span><span class="selector-class">.active</span> &#123; <span class="attribute">transform</span>: <span class="built_in">rotate</span>(<span class="number">90deg</span>); &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>状态切换</strong><ul>
+<li><strong>输入禁用到恢复</strong>: 生成中禁用输入，完成时按钮&#x2F;输入框淡入启用。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;input :disabled=&quot;disabled&quot; :class=&quot;&#123; off: disabled &#125;&quot; /&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">input &#123; transition: opacity .16s ease; &#125;</span><br><span class="line">input.off &#123; opacity: .6; &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>错误显现</strong>: 错误条目从顶部下落或抖动，文案&#x2F;重试按钮淡入。</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.shake</span> &#123; <span class="attribute">animation</span>: shake .<span class="number">28s</span> ease; &#125;</span><br><span class="line"><span class="keyword">@keyframes</span> shake &#123; <span class="number">10%</span>,<span class="number">90%</span>&#123; <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">1px</span>);&#125; <span class="number">20%</span>,<span class="number">80%</span>&#123; <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">2px</span>);&#125; <span class="number">30%</span>,<span class="number">50%</span>,<span class="number">70%</span>&#123; <span class="attribute">transform</span>: <span class="built_in">translateX</span>(-<span class="number">4px</span>);&#125; <span class="number">40%</span>,<span class="number">60%</span>&#123; <span class="attribute">transform</span>: <span class="built_in">translateX</span>(<span class="number">4px</span>);&#125; &#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>可访问性与性能建议</strong><ul>
+<li><strong>减少布局抖动</strong>: 使用 <code>will-change</code>, <code>transform</code>, <code>opacity</code>，避免频繁 DOM 重排。</li>
+<li><strong>节流渲染</strong>: 合并 token 为批量更新（如 16ms&#x2F;帧）。</li>
+</ul>
+</li>
+</ul>
+<figure class="highlight ts"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> q = <span class="string">&quot;&quot;</span>; <span class="keyword">let</span> ticking = <span class="literal">false</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">enqueue</span>(<span class="params"><span class="attr">chunk</span>: <span class="built_in">string</span>, <span class="attr">target</span>: <span class="built_in">any</span></span>)&#123;</span><br><span class="line">  q += chunk; <span class="keyword">if</span> (ticking) <span class="keyword">return</span>; ticking = <span class="literal">true</span>;</span><br><span class="line">  <span class="title function_">requestAnimationFrame</span>(<span class="function">() =&gt;</span> &#123; target.<span class="property">content</span> += q; q = <span class="string">&quot;&quot;</span>; ticking = <span class="literal">false</span>; &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><strong>A11y</strong>: 为动态区域加 <code>aria-live=&quot;polite&quot;</code>；动画时长控制在 150–300ms。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div aria-live=&quot;polite&quot; aria-atomic=&quot;false&quot;&gt;</span><br><span class="line">  &lt;!-- 动态消息内容 --&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>选择合适的动画强度与节奏，优先保障可读性与性能；针对不同内容类型（段落、代码、图片、来源），组合使用合适的过渡策略，既“快”又“稳”。</p>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="TGG 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E5%89%8D%E7%AB%AF/" rel="tag"># 前端</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2025/08/28/%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E5%A4%84%E7%90%86/" rel="prev" title="数据接收处理">
+      <i class="fa fa-chevron-left"></i> 数据接收处理
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/10/28/%E7%AE%97%E6%B3%95/" rel="next" title="排序">
+      排序 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <!-- 网站概览内容 -->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="TGG"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">TGG</p>
+  <div class="site-description" itemprop="description">一名立志成为全栈工程师的程序媛</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tgg426" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tgg426" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/t248210@163.com" title="E-Mail → t248210@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+      <!-- 侧边栏导航菜单 -->
+      <div class="sidebar-menu sidebar-panel motion-element">
+        <div class="sidebar-menu-title">
+          <i class="fa fa-bars fa-fw"></i>
+          导航菜单
+        </div>
+        <ul class="sidebar-menu-list">
+          <li class="sidebar-menu-item">
+            <a href="/" class="sidebar-menu-link">
+              <i class="fa fa-home fa-fw"></i>
+              <span>首页</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/about/" class="sidebar-menu-link">
+              <i class="fa fa-user fa-fw"></i>
+              <span>关于</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/tags/" class="sidebar-menu-link">
+              <i class="fa fa-tags fa-fw"></i>
+              <span>标签</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/categories/" class="sidebar-menu-link">
+              <i class="fa fa-th fa-fw"></i>
+              <span>分类</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/archives/" class="sidebar-menu-link">
+              <i class="fa fa-archive fa-fw"></i>
+              <span>归档</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 网易云音乐播放器 -->
+      <div class="netease-music-player sidebar-panel motion-element">
+        <div class="music-player-title">
+          <i class="fa fa-music fa-fw"></i>
+          音乐播放
+        </div>
+        <div class="netease-player-container">
+          <iframe 
+            frameborder="no" 
+            border="0" 
+            marginwidth="0" 
+            marginheight="0" 
+            width="320" 
+            height="86" 
+            src="//music.163.com/outchain/player?type=2&id=2099999600&auto=1&height=66">
+          </iframe>
+        </div>
+      </div>
+
+      <!--noindex-->
+      <div class="post-toc-toggle sidebar-panel motion-element">
+        <a class="btn-toc-toggle" href="javascript:void(0)">
+          <i class="fa fa-list"></i>
+          <span>目录</span>
+        </a>
+      </div>
+      <div class="post-toc-wrap sidebar-panel sidebar-panel-active">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#LLM-%E6%B5%81%E5%BC%8F%E5%9B%9E%E5%A4%8D%EF%BC%9A%E5%8A%A8%E7%94%BB%E4%B8%8E%E5%BE%AE%E4%BA%A4%E4%BA%92%E6%89%8B%E5%86%8C"><span class="nav-number">1.</span> <span class="nav-text">LLM 流式回复：动画与微交互手册</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%F0%9F%A7%AD-%E5%8A%A8%E7%94%BB%E4%B8%8E%E5%BE%AE%E4%BA%A4%E4%BA%92%E6%B8%85%E5%8D%95"><span class="nav-number">1.2.</span> <span class="nav-text">🧭 动画与微交互清单</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%BB%93%E8%AF%AD"><span class="nav-number">1.3.</span> <span class="nav-text">结语</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var tocBtn = document.querySelector('.btn-toc-toggle');
+        var tocWrap = document.querySelector('.post-toc-wrap');
+        if (tocBtn && tocWrap) {
+          tocBtn.addEventListener('click', function() {
+            tocWrap.classList.toggle('sidebar-panel-active');
+          });
+        }
+      });
+      </script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TGG</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='170' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/sidebar-nav.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

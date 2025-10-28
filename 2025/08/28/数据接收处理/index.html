@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"localhost","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="前端接收后端不同数据格式的处理要点一、uni-app&#x2F;微信小程序环境1) JSON（application&#x2F;json） 特征: 最常见的结构化响应。 处理: 小程序 wx.request 会在 success.res.data 给出已解析对象（若服务端正确设置 Content-Type）。 示例:  123456wx.request(&#123; url, method: &amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据接收处理">
+<meta property="og:url" content="http://localhost:4000/2025/08/28/%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E5%A4%84%E7%90%86/index.html">
+<meta property="og:site_name" content="TGG的博客">
+<meta property="og:description" content="前端接收后端不同数据格式的处理要点一、uni-app&#x2F;微信小程序环境1) JSON（application&#x2F;json） 特征: 最常见的结构化响应。 处理: 小程序 wx.request 会在 success.res.data 给出已解析对象（若服务端正确设置 Content-Type）。 示例:  123456wx.request(&#123; url, method: &amp;#">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2025-08-28T10:09:27.000Z">
+<meta property="article:modified_time" content="2025-10-28T11:16:46.819Z">
+<meta property="article:author" content="TGG">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://localhost:4000/2025/08/28/%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E5%A4%84%E7%90%86/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>数据接收处理 | TGG的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TGG的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome && Congratulations</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">8</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">10</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/tgg426" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2025/08/28/%E6%95%B0%E6%8D%AE%E6%8E%A5%E6%94%B6%E5%A4%84%E7%90%86/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="TGG">
+      <meta itemprop="description" content="一名立志成为全栈工程师的程序媛">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGG的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          数据接收处理
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2025-08-28 18:09:27" itemprop="dateCreated datePublished" datetime="2025-08-28T18:09:27+08:00">2025-08-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-28 19:16:46" itemprop="dateModified" datetime="2025-10-28T19:16:46+08:00">2025-10-28</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="前端接收后端不同数据格式的处理要点"><a href="#前端接收后端不同数据格式的处理要点" class="headerlink" title="前端接收后端不同数据格式的处理要点"></a>前端接收后端不同数据格式的处理要点</h1><h1 id="一、uni-app-微信小程序环境"><a href="#一、uni-app-微信小程序环境" class="headerlink" title="一、uni-app&#x2F;微信小程序环境"></a>一、uni-app&#x2F;微信小程序环境</h1><h2 id="1-JSON（application-json）"><a href="#1-JSON（application-json）" class="headerlink" title="1) JSON（application&#x2F;json）"></a>1) JSON（application&#x2F;json）</h2><ul>
+<li><strong>特征</strong>: 最常见的结构化响应。</li>
+<li><strong>处理</strong>: 小程序 <code>wx.request</code> 会在 <code>success.res.data</code> 给出已解析对象（若服务端正确设置 <code>Content-Type</code>）。</li>
+<li><strong>示例</strong>:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">wx.<span class="title function_">request</span>(&#123; url, <span class="attr">method</span>: <span class="string">&#x27;GET&#x27;</span>, <span class="attr">success</span>: <span class="function">(<span class="params">&#123; data &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="comment">// data 已是对象</span></span><br><span class="line">	<span class="keyword">if</span> (data.<span class="property">code</span> === <span class="number">200</span>) &#123;</span><br><span class="line">		<span class="variable language_">this</span>.<span class="property">list</span> = data.<span class="property">items</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-纯文本（text-plain）"><a href="#2-纯文本（text-plain）" class="headerlink" title="2) 纯文本（text&#x2F;plain）"></a>2) 纯文本（text&#x2F;plain）</h2><ul>
+<li><strong>特征</strong>: 文本内容，无结构。</li>
+<li><strong>处理</strong>: 直接作为字符串使用；如为 Markdown，交给渲染器（如 towxml）。</li>
+<li><strong>示例（Markdown 渲染）</strong>:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;towxml :nodes=&quot;appContext.$towxml(markdownStr,&#x27;markdown&#x27;)&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-SSE-流式数据（text-event-stream）"><a href="#3-SSE-流式数据（text-event-stream）" class="headerlink" title="3) SSE 流式数据（text&#x2F;event-stream）"></a>3) SSE 流式数据（text&#x2F;event-stream）</h2><ul>
+<li><strong>特征</strong>: 单向、按行事件（形如 <code>data: {...}\n\n</code>），适合 AI 对话流、监控推送。</li>
+<li><strong>处理</strong>: 小程序用 <code>enableChunked: true</code> + <code>onChunkReceived</code>；累积到 <code>buffer</code>，按 <code>\n</code> 切割，解析以 <code>data: </code> 开头的 JSON，忽略 <code>[DONE]</code>。</li>
+<li><strong>示例</strong>:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> requestTask = wx.<span class="title function_">request</span>(&#123; url, <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">data</span>: body, <span class="attr">enableChunked</span>: <span class="literal">true</span> &#125;)</span><br><span class="line"><span class="keyword">let</span> buffer = <span class="string">&#x27;&#x27;</span></span><br><span class="line">requestTask.<span class="title function_">onChunkReceived</span>(<span class="function">(<span class="params">&#123; data &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> u8 = <span class="keyword">new</span> <span class="title class_">Uint8Array</span>(data)</span><br><span class="line">	<span class="keyword">let</span> chunk = <span class="string">&#x27;&#x27;</span></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; u8.<span class="property">length</span>; i++) chunk += <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(u8[i])</span><br><span class="line">	buffer += <span class="built_in">decodeURIComponent</span>(<span class="built_in">escape</span>(chunk))</span><br><span class="line">	<span class="keyword">while</span> (buffer.<span class="title function_">includes</span>(<span class="string">&#x27;\n&#x27;</span>)) &#123;</span><br><span class="line">		<span class="keyword">const</span> i = buffer.<span class="title function_">indexOf</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">		<span class="keyword">const</span> line = buffer.<span class="title function_">slice</span>(<span class="number">0</span>, i)</span><br><span class="line">		buffer = buffer.<span class="title function_">slice</span>(i + <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">if</span> (line.<span class="title function_">startsWith</span>(<span class="string">&#x27;data: &#x27;</span>) &amp;&amp; !line.<span class="title function_">includes</span>(<span class="string">&#x27;[DONE]&#x27;</span>)) &#123;</span><br><span class="line">			<span class="keyword">const</span> json = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(line.<span class="title function_">replace</span>(<span class="string">&#x27;data: &#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line">			<span class="comment">// 逐增量渲染</span></span><br><span class="line">			<span class="title function_">appendDelta</span>(json)</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-WebSocket（ws-wss）"><a href="#4-WebSocket（ws-wss）" class="headerlink" title="4) WebSocket（ws&#x2F;wss）"></a>4) WebSocket（ws&#x2F;wss）</h2><ul>
+<li><strong>特征</strong>: 双向、低延迟，可文本&#x2F;二进制，适合实时聊天、协同编辑、音视频控制。</li>
+<li><strong>处理</strong>: 管理连接、心跳、重连；消息按协议字段区分类型。</li>
+<li><strong>示例</strong>:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&#x27;wss://example.com/ws&#x27;</span>)</span><br><span class="line">ws.<span class="property">onopen</span> = <span class="function">() =&gt;</span> <span class="title function_">heartbeat</span>()</span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="function"><span class="params">e</span> =&gt;</span> <span class="title function_">handle</span>(<span class="title class_">JSON</span>.<span class="title function_">parse</span>(e.<span class="property">data</span>))</span><br><span class="line">ws.<span class="property">onclose</span> = <span class="function">() =&gt;</span> <span class="title function_">reconnect</span>()</span><br><span class="line">ws.<span class="property">onerror</span> = <span class="function">() =&gt;</span> ws.<span class="title function_">close</span>()</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-二进制（ArrayBuffer-Blob、图片-音频）"><a href="#5-二进制（ArrayBuffer-Blob、图片-音频）" class="headerlink" title="5) 二进制（ArrayBuffer&#x2F;Blob、图片&#x2F;音频）"></a>5) 二进制（ArrayBuffer&#x2F;Blob、图片&#x2F;音频）</h2><ul>
+<li><strong>特征</strong>: 文件、媒体流、模型参数等。</li>
+<li><strong>处理</strong>:<br>下载：<code>wx.downloadFile</code> 或 <code>wx.request</code> 的 <code>responseType: &#39;arraybuffer&#39;</code>（H5 用 fetch Blob）。<br>显示图片：拿到 URL 或临时路径直接 <code>&lt;image src=&quot;...&quot;/&gt;</code>。</li>
+<li><strong>示例（下载图片并预览）</strong>:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">wx.<span class="title function_">downloadFile</span>(&#123; url, <span class="attr">success</span>: <span class="function">(<span class="params">&#123; tempFilePath &#125;</span>) =&gt;</span> &#123;</span><br><span class="line">	uni.<span class="title function_">previewImage</span>(&#123; <span class="attr">urls</span>: [tempFilePath] &#125;)</span><br><span class="line">&#125;&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-NDJSON（换行分隔-JSON）"><a href="#6-NDJSON（换行分隔-JSON）" class="headerlink" title="6) NDJSON（换行分隔 JSON）"></a>6) NDJSON（换行分隔 JSON）</h2><ul>
+<li><strong>特征</strong>: 每行一个 JSON，常用于日志&#x2F;流式批处理。</li>
+<li><strong>处理</strong>: 与 SSE 类似，按行切割后 <code>JSON.parse</code> 每行；注意半包合并。</li>
+<li><strong>示例</strong>:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">buffer += chunk</span><br><span class="line"><span class="keyword">let</span> idx</span><br><span class="line"><span class="keyword">while</span> ((idx = buffer.<span class="title function_">indexOf</span>(<span class="string">&#x27;\n&#x27;</span>)) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> line = buffer.<span class="title function_">slice</span>(<span class="number">0</span>, idx); buffer = buffer.<span class="title function_">slice</span>(idx + <span class="number">1</span>)</span><br><span class="line">	<span class="keyword">if</span> (line.<span class="title function_">trim</span>()) <span class="title function_">handle</span>(<span class="title class_">JSON</span>.<span class="title function_">parse</span>(line))</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-CSV（text-csv）"><a href="#7-CSV（text-csv）" class="headerlink" title="7) CSV（text&#x2F;csv）"></a>7) CSV（text&#x2F;csv）</h2><ul>
+<li><strong>特征</strong>: 表格数据，字段由逗号分隔，可能包含转义。</li>
+<li><strong>处理</strong>: 轻量可 <code>split(&#39;\n&#39;).map(r=&gt;r.split(&#39;,&#39;))</code>；复杂用库（H5 可用 PapaParse，小程序需自带解析）。</li>
+<li><strong>示例（简易）</strong>:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> rows = csvText.<span class="title function_">trim</span>().<span class="title function_">split</span>(<span class="regexp">/\r?\n/</span>)</span><br><span class="line"><span class="keyword">const</span> data = rows.<span class="title function_">map</span>(<span class="function"><span class="params">r</span> =&gt;</span> r.<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-表单与文件上传（multipart-form-data-application-x-www-form-urlencoded）"><a href="#8-表单与文件上传（multipart-form-data-application-x-www-form-urlencoded）" class="headerlink" title="8) 表单与文件上传（multipart&#x2F;form-data, application&#x2F;x-www-form-urlencoded）"></a>8) 表单与文件上传（multipart&#x2F;form-data, application&#x2F;x-www-form-urlencoded）</h2><ul>
+<li><strong>特征</strong>: 表单字段与文件混合。</li>
+<li><strong>处理</strong>: 用 <code>wx.uploadFile</code> 处理文件；普通表单用 <code>wx.request</code> 传对象（小程序会序列化）。</li>
+<li><strong>示例（上传）</strong>:</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">wx.<span class="title function_">uploadFile</span>(&#123;</span><br><span class="line">	url,</span><br><span class="line">	<span class="attr">filePath</span>: tempPath,</span><br><span class="line">	<span class="attr">name</span>: <span class="string">&#x27;file&#x27;</span>,</span><br><span class="line">	<span class="attr">formData</span>: &#123; <span class="attr">bizId</span>: <span class="string">&#x27;123&#x27;</span> &#125;,</span><br><span class="line">	<span class="attr">success</span>: <span class="function">(<span class="params">&#123; data &#125;</span>) =&gt;</span> <span class="title function_">handle</span>(<span class="title class_">JSON</span>.<span class="title function_">parse</span>(data))</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-Base64-数据（data-URI-纯-base64）"><a href="#9-Base64-数据（data-URI-纯-base64）" class="headerlink" title="9) Base64 数据（data URI &#x2F; 纯 base64）"></a>9) Base64 数据（data URI &#x2F; 纯 base64）</h2><ul>
+<li><strong>特征</strong>: 图片&#x2F;音频内嵌编码。</li>
+<li><strong>处理</strong>: H5 可直接 <code>img.src = &#39;data:image/png;base64,...&#39;</code>；小程序多用文件写入或转临时路径（或服务端返回 URL 更佳）。</li>
+</ul>
+<h2 id="10-Markdown（富文本表格-代码-数学）"><a href="#10-Markdown（富文本表格-代码-数学）" class="headerlink" title="10) Markdown（富文本表格&#x2F;代码&#x2F;数学）"></a>10) Markdown（富文本表格&#x2F;代码&#x2F;数学）</h2><ul>
+<li><strong>特征</strong>: 文本 + 语法标记。</li>
+<li><strong>处理</strong>: 使用渲染器（如本项目的 towxml）转节点树，交由组件展示；表格语法会被转为 <code>&lt;table&gt;</code> 的 WXML 结构。</li>
+<li><strong>示例</strong>:</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;towxml :nodes=&quot;appContext.$towxml(markdownStr,&#x27;markdown&#x27;)&quot; /&gt;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="建议"><a href="#建议" class="headerlink" title="建议"></a>建议</h3><ul>
+<li><strong>与后端约定响应头</strong>：<code>Content-Type</code> 准确决定解析方式。</li>
+<li><strong>流式数据统一解析器</strong>：SSE&#x2F;NDJSON 共用“行缓冲 + 解析”的工具函数。</li>
+<li><strong>健壮性</strong>：半包合并、异常 JSON try&#x2F;catch、自动重连（SSE&#x2F;WS）。</li>
+<li><strong>类型与协议</strong>：为 WebSocket 消息定义 <code>type</code> 字段，便于路由处理。</li>
+<li><strong>性能</strong>：批量渲染&#x2F;合并 setState，减少频繁重绘（如 AI 流式逐字追加时）。</li>
+<li><strong>安全</strong>：富文本&#x2F;Markdown 渲染需防范 XSS（受控渲染器、白名单）。</li>
+</ul>
+<h1 id="二、Web端环境"><a href="#二、Web端环境" class="headerlink" title="二、Web端环境"></a>二、Web端环境</h1><h2 id="1-JSON（application-json）-1"><a href="#1-JSON（application-json）-1" class="headerlink" title="1) JSON（application&#x2F;json）"></a>1) JSON（application&#x2F;json）</h2><ul>
+<li><strong>特征</strong>: 结构化对象，最常见。</li>
+<li><strong>处理</strong>: <code>fetch().then(r=&gt;r.json())</code>；注意错误码不抛异常，需自判。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="title function_">fetch</span>(<span class="string">&#x27;/api/items&#x27;</span>).<span class="title function_">then</span>(<span class="keyword">async</span> r =&gt; &#123;</span><br><span class="line">	<span class="keyword">if</span> (!r.<span class="property">ok</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="keyword">await</span> r.<span class="title function_">text</span>())</span><br><span class="line">	<span class="keyword">const</span> data = <span class="keyword">await</span> r.<span class="title function_">json</span>()</span><br><span class="line">	<span class="title function_">render</span>(data)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-纯文本（text-plain）-1"><a href="#2-纯文本（text-plain）-1" class="headerlink" title="2) 纯文本（text&#x2F;plain）"></a>2) 纯文本（text&#x2F;plain）</h2><ul>
+<li><strong>特征</strong>: 文本响应。</li>
+<li><strong>处理</strong>: <code>response.text()</code>；若为 Markdown，交给渲染器（marked、markdown-it）。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> md = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;/readme.md&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">r</span> =&gt;</span> r.<span class="title function_">text</span>())</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#app&#x27;</span>).<span class="property">innerHTML</span> = marked.<span class="title function_">parse</span>(md)</span><br></pre></td></tr></table></figure>
+
+<h2 id="3-SSE-流式数据（text-event-stream）-1"><a href="#3-SSE-流式数据（text-event-stream）-1" class="headerlink" title="3) SSE 流式数据（text&#x2F;event-stream）"></a>3) SSE 流式数据（text&#x2F;event-stream）</h2><ul>
+<li><strong>特征</strong>: 服务端→客户端单向推送，自动重连。</li>
+<li><strong>处理</strong>: 使用 <code>EventSource</code>；从 <code>event.data</code> 取字符串，再按需 <code>JSON.parse</code>。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> es = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">&#x27;/stream&#x27;</span>)</span><br><span class="line">es.<span class="property">onmessage</span> = <span class="function"><span class="params">e</span> =&gt;</span> &#123;</span><br><span class="line">	<span class="keyword">const</span> data = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(e.<span class="property">data</span>)</span><br><span class="line">	<span class="title function_">appendDelta</span>(data)</span><br><span class="line">&#125;</span><br><span class="line">es.<span class="property">onerror</span> = <span class="function">() =&gt;</span> es.<span class="title function_">close</span>()</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-Fetch-流式读取（ReadableStream-NDJSON）"><a href="#4-Fetch-流式读取（ReadableStream-NDJSON）" class="headerlink" title="4) Fetch 流式读取（ReadableStream &#x2F; NDJSON）"></a>4) Fetch 流式读取（ReadableStream &#x2F; NDJSON）</h2><ul>
+<li><strong>特征</strong>: 分块返回，行分隔 JSON、日志等。</li>
+<li><strong>处理</strong>: 读取 <code>response.body</code> 的 <code>ReadableStream</code>，使用 <code>TextDecoder</code> 解码，做“行缓冲”。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> r = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;/ndjson&#x27;</span>)</span><br><span class="line"><span class="keyword">const</span> reader = r.<span class="property">body</span>.<span class="title function_">getReader</span>()</span><br><span class="line"><span class="keyword">const</span> decoder = <span class="keyword">new</span> <span class="title class_">TextDecoder</span>(<span class="string">&#x27;utf-8&#x27;</span>)</span><br><span class="line"><span class="keyword">let</span> buf = <span class="string">&#x27;&#x27;</span></span><br><span class="line"><span class="keyword">while</span> (<span class="literal">true</span>) &#123;</span><br><span class="line">	<span class="keyword">const</span> &#123; value, done &#125; = <span class="keyword">await</span> reader.<span class="title function_">read</span>()</span><br><span class="line">	<span class="keyword">if</span> (done) <span class="keyword">break</span></span><br><span class="line">	buf += decoder.<span class="title function_">decode</span>(value, &#123; <span class="attr">stream</span>: <span class="literal">true</span> &#125;)</span><br><span class="line">	<span class="keyword">let</span> idx</span><br><span class="line">	<span class="keyword">while</span> ((idx = buf.<span class="title function_">indexOf</span>(<span class="string">&#x27;\n&#x27;</span>)) &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">		<span class="keyword">const</span> line = buf.<span class="title function_">slice</span>(<span class="number">0</span>, idx); buf = buf.<span class="title function_">slice</span>(idx + <span class="number">1</span>)</span><br><span class="line">		<span class="keyword">if</span> (line.<span class="title function_">trim</span>()) <span class="title function_">handle</span>(<span class="title class_">JSON</span>.<span class="title function_">parse</span>(line))</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-WebSocket（ws-wss）"><a href="#5-WebSocket（ws-wss）" class="headerlink" title="5) WebSocket（ws&#x2F;wss）"></a>5) WebSocket（ws&#x2F;wss）</h2><ul>
+<li><strong>特征</strong>: 全双工、低延迟，文本&#x2F;二进制皆可。</li>
+<li><strong>处理</strong>: 管理心跳、重连；消息按 <code>type</code> 路由。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> ws</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">connect</span>(<span class="params"></span>)&#123;</span><br><span class="line">	ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&#x27;wss://example.com/ws&#x27;</span>)</span><br><span class="line">	ws.<span class="property">onopen</span> = <span class="function">() =&gt;</span> ws.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; <span class="attr">type</span>: <span class="string">&#x27;hello&#x27;</span> &#125;))</span><br><span class="line">	ws.<span class="property">onmessage</span> = <span class="function"><span class="params">e</span> =&gt;</span> <span class="title function_">route</span>(<span class="title class_">JSON</span>.<span class="title function_">parse</span>(e.<span class="property">data</span>))</span><br><span class="line">	ws.<span class="property">onclose</span> = <span class="function">() =&gt;</span> <span class="built_in">setTimeout</span>(connect, <span class="number">3000</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="title function_">connect</span>()</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-二进制（Blob-ArrayBuffer，图片-音频-文件）"><a href="#6-二进制（Blob-ArrayBuffer，图片-音频-文件）" class="headerlink" title="6) 二进制（Blob&#x2F;ArrayBuffer，图片&#x2F;音频&#x2F;文件）"></a>6) 二进制（Blob&#x2F;ArrayBuffer，图片&#x2F;音频&#x2F;文件）</h2><ul>
+<li><strong>特征</strong>: 文件下载、媒体、模型参数。</li>
+<li><strong>处理</strong>: <code>response.blob()</code> 或 <code>response.arrayBuffer()</code>；通过 <code>URL.createObjectURL</code> 预览。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> blob = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;/image.png&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">r</span> =&gt;</span> r.<span class="title function_">blob</span>())</span><br><span class="line"><span class="keyword">const</span> url = <span class="variable constant_">URL</span>.<span class="title function_">createObjectURL</span>(blob)</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;img&#x27;</span>).<span class="property">src</span> = url</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-CSV（text-csv）-1"><a href="#7-CSV（text-csv）-1" class="headerlink" title="7) CSV（text&#x2F;csv）"></a>7) CSV（text&#x2F;csv）</h2><ul>
+<li><strong>特征</strong>: 表格数据。</li>
+<li><strong>处理</strong>: 简单可手写解析；复杂用库（Papa Parse）。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> csv = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;/data.csv&#x27;</span>).<span class="title function_">then</span>(<span class="function"><span class="params">r</span> =&gt;</span> r.<span class="title function_">text</span>())</span><br><span class="line"><span class="keyword">const</span> rows = csv.<span class="title function_">trim</span>().<span class="title function_">split</span>(<span class="regexp">/\r?\n/</span>)</span><br><span class="line"><span class="keyword">const</span> data = rows.<span class="title function_">map</span>(<span class="function"><span class="params">r</span> =&gt;</span> r.<span class="title function_">split</span>(<span class="string">&#x27;,&#x27;</span>))</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-表单与文件上传（multipart-form-data-x-www-form-urlencoded）"><a href="#8-表单与文件上传（multipart-form-data-x-www-form-urlencoded）" class="headerlink" title="8) 表单与文件上传（multipart&#x2F;form-data, x-www-form-urlencoded）"></a>8) 表单与文件上传（multipart&#x2F;form-data, x-www-form-urlencoded）</h2><ul>
+<li><strong>特征</strong>: 字段与文件混合或表单编码。</li>
+<li><strong>处理</strong>: <code>FormData</code> 配合 fetch；无需手动设置 <code>Content-Type</code>（浏览器自动）。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> fd = <span class="keyword">new</span> <span class="title class_">FormData</span>()</span><br><span class="line">fd.<span class="title function_">append</span>(<span class="string">&#x27;title&#x27;</span>,<span class="string">&#x27;demo&#x27;</span>)</span><br><span class="line">fd.<span class="title function_">append</span>(<span class="string">&#x27;file&#x27;</span>, fileInput.<span class="property">files</span>[<span class="number">0</span>])</span><br><span class="line"><span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&#x27;/upload&#x27;</span>, &#123; <span class="attr">method</span>: <span class="string">&#x27;POST&#x27;</span>, <span class="attr">body</span>: fd &#125;)</span><br></pre></td></tr></table></figure>
+
+<h2 id="9-Base64-Data-URL"><a href="#9-Base64-Data-URL" class="headerlink" title="9) Base64 &#x2F; Data URL"></a>9) Base64 &#x2F; Data URL</h2><ul>
+<li><strong>特征</strong>: 内嵌编码的媒体数据。</li>
+<li><strong>处理</strong>: 直接赋给 <code>src</code>；或转 Blob 以减小内存峰值。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;img&#x27;</span>).<span class="property">src</span> = <span class="string">&#x27;data:image/png;base64,&#x27;</span> + b64</span><br></pre></td></tr></table></figure>
+
+<h2 id="10-Markdown-富文本（XSS-安全）"><a href="#10-Markdown-富文本（XSS-安全）" class="headerlink" title="10) Markdown&#x2F;富文本（XSS 安全）"></a>10) Markdown&#x2F;富文本（XSS 安全）</h2><ul>
+<li><strong>特征</strong>: 富文本、表格、代码块。</li>
+<li><strong>处理</strong>: 使用可信渲染器，启用 XSS 过滤（DOMPurify）。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> html = marked.<span class="title function_">parse</span>(md)</span><br><span class="line"><span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;#app&#x27;</span>).<span class="property">innerHTML</span> = <span class="title class_">DOMPurify</span>.<span class="title function_">sanitize</span>(html)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="建议-1"><a href="#建议-1" class="headerlink" title="建议"></a>建议</h3><ul>
+<li><strong>Content-Type 与状态码</strong>：先判 <code>response.ok</code>，再按类型解析（json&#x2F;text&#x2F;blob）。</li>
+<li><strong>流式渲染节流</strong>：高频增量（AI 字符流）批量合并（<code>requestAnimationFrame</code>&#x2F;计时器）。</li>
+<li><strong>重连策略</strong>：SSE 自动；WebSocket 指数回退并带抖动，心跳保活。</li>
+<li><strong>内存管理</strong>：用完的 Blob 调用 <code>URL.revokeObjectURL</code>；大型数组分片处理。</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="TGG 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/12/28/%E6%96%87%E7%94%9F%E8%A7%86%E9%A2%91/" rel="prev" title="大模型应用--文生视频">
+      <i class="fa fa-chevron-left"></i> 大模型应用--文生视频
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2025/09/02/%E5%AF%B9%E8%AF%9D%E5%8A%A8%E7%94%BB%E6%B8%B2%E6%9F%93/" rel="next" title="LLM 流式回复的动画与交互">
+      LLM 流式回复的动画与交互 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <!-- 网站概览内容 -->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="TGG"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">TGG</p>
+  <div class="site-description" itemprop="description">一名立志成为全栈工程师的程序媛</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">10</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tgg426" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tgg426" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/t248210@163.com" title="E-Mail → t248210@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+      <!-- 侧边栏导航菜单 -->
+      <div class="sidebar-menu sidebar-panel motion-element">
+        <div class="sidebar-menu-title">
+          <i class="fa fa-bars fa-fw"></i>
+          导航菜单
+        </div>
+        <ul class="sidebar-menu-list">
+          <li class="sidebar-menu-item">
+            <a href="/" class="sidebar-menu-link">
+              <i class="fa fa-home fa-fw"></i>
+              <span>首页</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/about/" class="sidebar-menu-link">
+              <i class="fa fa-user fa-fw"></i>
+              <span>关于</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/tags/" class="sidebar-menu-link">
+              <i class="fa fa-tags fa-fw"></i>
+              <span>标签</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/categories/" class="sidebar-menu-link">
+              <i class="fa fa-th fa-fw"></i>
+              <span>分类</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/archives/" class="sidebar-menu-link">
+              <i class="fa fa-archive fa-fw"></i>
+              <span>归档</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 网易云音乐播放器 -->
+      <div class="netease-music-player sidebar-panel motion-element">
+        <div class="music-player-title">
+          <i class="fa fa-music fa-fw"></i>
+          音乐播放
+        </div>
+        <div class="netease-player-container">
+          <iframe 
+            frameborder="no" 
+            border="0" 
+            marginwidth="0" 
+            marginheight="0" 
+            width="320" 
+            height="86" 
+            src="//music.163.com/outchain/player?type=2&id=2099999600&auto=1&height=66">
+          </iframe>
+        </div>
+      </div>
+
+      <!--noindex-->
+      <div class="post-toc-toggle sidebar-panel motion-element">
+        <a class="btn-toc-toggle" href="javascript:void(0)">
+          <i class="fa fa-list"></i>
+          <span>目录</span>
+        </a>
+      </div>
+      <div class="post-toc-wrap sidebar-panel sidebar-panel-active">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#%E5%89%8D%E7%AB%AF%E6%8E%A5%E6%94%B6%E5%90%8E%E7%AB%AF%E4%B8%8D%E5%90%8C%E6%95%B0%E6%8D%AE%E6%A0%BC%E5%BC%8F%E7%9A%84%E5%A4%84%E7%90%86%E8%A6%81%E7%82%B9"><span class="nav-number">1.</span> <span class="nav-text">前端接收后端不同数据格式的处理要点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%B8%80%E3%80%81uni-app-%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%8E%AF%E5%A2%83"><span class="nav-number">2.</span> <span class="nav-text">一、uni-app&#x2F;微信小程序环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-JSON%EF%BC%88application-json%EF%BC%89"><span class="nav-number">2.1.</span> <span class="nav-text">1) JSON（application&#x2F;json）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%BA%AF%E6%96%87%E6%9C%AC%EF%BC%88text-plain%EF%BC%89"><span class="nav-number">2.2.</span> <span class="nav-text">2) 纯文本（text&#x2F;plain）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-SSE-%E6%B5%81%E5%BC%8F%E6%95%B0%E6%8D%AE%EF%BC%88text-event-stream%EF%BC%89"><span class="nav-number">2.3.</span> <span class="nav-text">3) SSE 流式数据（text&#x2F;event-stream）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-WebSocket%EF%BC%88ws-wss%EF%BC%89"><span class="nav-number">2.4.</span> <span class="nav-text">4) WebSocket（ws&#x2F;wss）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88ArrayBuffer-Blob%E3%80%81%E5%9B%BE%E7%89%87-%E9%9F%B3%E9%A2%91%EF%BC%89"><span class="nav-number">2.5.</span> <span class="nav-text">5) 二进制（ArrayBuffer&#x2F;Blob、图片&#x2F;音频）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-NDJSON%EF%BC%88%E6%8D%A2%E8%A1%8C%E5%88%86%E9%9A%94-JSON%EF%BC%89"><span class="nav-number">2.6.</span> <span class="nav-text">6) NDJSON（换行分隔 JSON）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-CSV%EF%BC%88text-csv%EF%BC%89"><span class="nav-number">2.7.</span> <span class="nav-text">7) CSV（text&#x2F;csv）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E8%A1%A8%E5%8D%95%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88multipart-form-data-application-x-www-form-urlencoded%EF%BC%89"><span class="nav-number">2.8.</span> <span class="nav-text">8) 表单与文件上传（multipart&#x2F;form-data, application&#x2F;x-www-form-urlencoded）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Base64-%E6%95%B0%E6%8D%AE%EF%BC%88data-URI-%E7%BA%AF-base64%EF%BC%89"><span class="nav-number">2.9.</span> <span class="nav-text">9) Base64 数据（data URI &#x2F; 纯 base64）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Markdown%EF%BC%88%E5%AF%8C%E6%96%87%E6%9C%AC%E8%A1%A8%E6%A0%BC-%E4%BB%A3%E7%A0%81-%E6%95%B0%E5%AD%A6%EF%BC%89"><span class="nav-number">2.10.</span> <span class="nav-text">10) Markdown（富文本表格&#x2F;代码&#x2F;数学）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E8%AE%AE"><span class="nav-number">2.10.1.</span> <span class="nav-text">建议</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Web%E7%AB%AF%E7%8E%AF%E5%A2%83"><span class="nav-number">3.</span> <span class="nav-text">二、Web端环境</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-JSON%EF%BC%88application-json%EF%BC%89-1"><span class="nav-number">3.1.</span> <span class="nav-text">1) JSON（application&#x2F;json）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#2-%E7%BA%AF%E6%96%87%E6%9C%AC%EF%BC%88text-plain%EF%BC%89-1"><span class="nav-number">3.2.</span> <span class="nav-text">2) 纯文本（text&#x2F;plain）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#3-SSE-%E6%B5%81%E5%BC%8F%E6%95%B0%E6%8D%AE%EF%BC%88text-event-stream%EF%BC%89-1"><span class="nav-number">3.3.</span> <span class="nav-text">3) SSE 流式数据（text&#x2F;event-stream）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-Fetch-%E6%B5%81%E5%BC%8F%E8%AF%BB%E5%8F%96%EF%BC%88ReadableStream-NDJSON%EF%BC%89"><span class="nav-number">3.4.</span> <span class="nav-text">4) Fetch 流式读取（ReadableStream &#x2F; NDJSON）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#5-WebSocket%EF%BC%88ws-wss%EF%BC%89"><span class="nav-number">3.5.</span> <span class="nav-text">5) WebSocket（ws&#x2F;wss）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#6-%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%88Blob-ArrayBuffer%EF%BC%8C%E5%9B%BE%E7%89%87-%E9%9F%B3%E9%A2%91-%E6%96%87%E4%BB%B6%EF%BC%89"><span class="nav-number">3.6.</span> <span class="nav-text">6) 二进制（Blob&#x2F;ArrayBuffer，图片&#x2F;音频&#x2F;文件）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#7-CSV%EF%BC%88text-csv%EF%BC%89-1"><span class="nav-number">3.7.</span> <span class="nav-text">7) CSV（text&#x2F;csv）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#8-%E8%A1%A8%E5%8D%95%E4%B8%8E%E6%96%87%E4%BB%B6%E4%B8%8A%E4%BC%A0%EF%BC%88multipart-form-data-x-www-form-urlencoded%EF%BC%89"><span class="nav-number">3.8.</span> <span class="nav-text">8) 表单与文件上传（multipart&#x2F;form-data, x-www-form-urlencoded）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#9-Base64-Data-URL"><span class="nav-number">3.9.</span> <span class="nav-text">9) Base64 &#x2F; Data URL</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#10-Markdown-%E5%AF%8C%E6%96%87%E6%9C%AC%EF%BC%88XSS-%E5%AE%89%E5%85%A8%EF%BC%89"><span class="nav-number">3.10.</span> <span class="nav-text">10) Markdown&#x2F;富文本（XSS 安全）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%BB%BA%E8%AE%AE-1"><span class="nav-number">3.10.1.</span> <span class="nav-text">建议</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var tocBtn = document.querySelector('.btn-toc-toggle');
+        var tocWrap = document.querySelector('.post-toc-wrap');
+        if (tocBtn && tocWrap) {
+          tocBtn.addEventListener('click', function() {
+            tocWrap.classList.toggle('sidebar-panel-active');
+          });
+        }
+      });
+      </script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TGG</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='170' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/sidebar-nav.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
