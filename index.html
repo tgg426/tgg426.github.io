@@ -1,0 +1,1353 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"localhost","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="一名立志成为全栈工程师的程序媛">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TGG的博客">
+<meta property="og:url" content="http://localhost:4000/index.html">
+<meta property="og:site_name" content="TGG的博客">
+<meta property="og:description" content="一名立志成为全栈工程师的程序媛">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:author" content="TGG">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://localhost:4000/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : true,
+    isPost : false,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>TGG的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TGG的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome && Congratulations</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">6</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/tgg426" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content index posts-expand">
+            
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2024/12/28/%E6%96%87%E7%94%9F%E8%A7%86%E9%A2%91/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="TGG">
+      <meta itemprop="description" content="一名立志成为全栈工程师的程序媛">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGG的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/12/28/%E6%96%87%E7%94%9F%E8%A7%86%E9%A2%91/" class="post-title-link" itemprop="url">大模型应用--文生视频</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-12-28 13:05:46" itemprop="dateCreated datePublished" datetime="2024-12-28T13:05:46+08:00">2024-12-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-28 15:18:37" itemprop="dateModified" datetime="2025-10-28T15:18:37+08:00">2025-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">大模型应用</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h4 id="后续整理，敬请期待！"><a href="#后续整理，敬请期待！" class="headerlink" title="后续整理，敬请期待！"></a>后续整理，敬请期待！</h4>
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2024/12/20/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="TGG">
+      <meta itemprop="description" content="一名立志成为全栈工程师的程序媛">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGG的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/12/20/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" class="post-title-link" itemprop="url">大模型应用--文生文</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-12-20 12:50:10" itemprop="dateCreated datePublished" datetime="2024-12-20T12:50:10+08:00">2024-12-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-28 15:18:31" itemprop="dateModified" datetime="2025-10-28T15:18:31+08:00">2025-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">大模型应用</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="完整流程"><a href="#完整流程" class="headerlink" title="完整流程"></a>完整流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">前端请求 → 参数验证 → 调用智谱AI → 流式返回 → 存储聊天记录 → 返回结果</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-文生文接口"><a href="#1-文生文接口" class="headerlink" title="1. 文生文接口"></a>1. 文生文接口</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">createCompletions</span>(<span class="params">ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; messages &#125; = ctx.<span class="property">request</span>.<span class="property">body</span>;</span><br><span class="line">  <span class="comment">// 参数验证</span></span><br><span class="line">  <span class="keyword">await</span> <span class="title class_">Validate</span>.<span class="title function_">isarrayCheck</span>(messages, <span class="string">&quot;缺少对话信息&quot;</span>, <span class="string">&quot;messages&quot;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 调用智谱AI API</span></span><br><span class="line">  <span class="keyword">const</span> data = <span class="keyword">await</span> ai.<span class="title function_">createCompletions</span>(&#123;</span><br><span class="line">    <span class="attr">model</span>: <span class="string">&quot;glm-4-0520&quot;</span>,           <span class="comment">// 使用GLM-4-0520模型</span></span><br><span class="line">    messages,                       <span class="comment">// 对话消息数组</span></span><br><span class="line">    <span class="attr">stream</span>: <span class="literal">true</span>,                   <span class="comment">// 启用流式输出</span></span><br><span class="line">    <span class="attr">tools</span>: [                        <span class="comment">// 工具配置</span></span><br><span class="line">      &#123;</span><br><span class="line">        <span class="attr">type</span>: <span class="string">&quot;web_search&quot;</span>,        <span class="comment">// 启用联网搜索</span></span><br><span class="line">        <span class="attr">web_search</span>: &#123;</span><br><span class="line">          <span class="attr">enable</span>: <span class="literal">true</span>,</span><br><span class="line">          <span class="attr">search_result</span>: <span class="literal">true</span>,</span><br><span class="line">        &#125;,</span><br><span class="line">      &#125;,</span><br><span class="line">    ],</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  ctx.<span class="property">status</span> = <span class="number">200</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 流式返回AI响应</span></span><br><span class="line">  <span class="keyword">for</span> <span class="title function_">await</span> (<span class="keyword">const</span> chunk <span class="keyword">of</span> data) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(chunk.<span class="title function_">toString</span>());</span><br><span class="line">    ctx.<span class="property">res</span>.<span class="title function_">write</span>(chunk);  <span class="comment">// 逐个写入HTTP响应</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-智谱AI初始化"><a href="#2-智谱AI初始化" class="headerlink" title="2. 智谱AI初始化"></a>2. 智谱AI初始化</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">ZhipuAI</span> &#125; = <span class="built_in">require</span>(<span class="string">&quot;zhipuai-sdk-nodejs-v4&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; apiKey &#125; = <span class="built_in">require</span>(<span class="string">&quot;@/config/default&quot;</span>).<span class="property">zhipu</span>;</span><br><span class="line"><span class="keyword">const</span> ai = <span class="keyword">new</span> <span class="title class_">ZhipuAI</span>(&#123; apiKey &#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-消息格式"><a href="#3-消息格式" class="headerlink" title="3. 消息格式"></a>3. 消息格式</h3><p>智谱AI的messages参数格式：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">messages = [</span><br><span class="line">  &#123; <span class="attr">role</span>: <span class="string">&quot;system&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;你是一个有用的AI助手&quot;</span> &#125;,  <span class="comment">// 系统提示（可选）</span></span><br><span class="line">  &#123; <span class="attr">role</span>: <span class="string">&quot;user&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;什么是人工智能？&quot;</span> &#125;,         <span class="comment">// 用户消息</span></span><br><span class="line">  &#123; <span class="attr">role</span>: <span class="string">&quot;assistant&quot;</span>, <span class="attr">content</span>: <span class="string">&quot;人工智能是...&quot;</span> &#125;,        <span class="comment">// AI回复</span></span><br><span class="line">  <span class="comment">// ... 更多轮对话</span></span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-流式响应机制"><a href="#4-流式响应机制" class="headerlink" title="4. 流式响应机制"></a>4. 流式响应机制</h3><h4 id="4-1-什么是流式响应？"><a href="#4-1-什么是流式响应？" class="headerlink" title="4.1 什么是流式响应？"></a>4.1 什么是流式响应？</h4><p>流式响应（Streaming Response）允许服务端边生成边返回，不需要等待完整内容生成完毕。</p>
+<h4 id="4-2-实现原理"><a href="#4-2-实现原理" class="headerlink" title="4.2 实现原理"></a>4.2 实现原理</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 返回一个异步可迭代对象</span></span><br><span class="line"><span class="keyword">const</span> data = <span class="keyword">await</span> ai.<span class="title function_">createCompletions</span>(&#123; ... &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 遍历并逐个推送chunk</span></span><br><span class="line"><span class="keyword">for</span> <span class="title function_">await</span> (<span class="keyword">const</span> chunk <span class="keyword">of</span> data) &#123;</span><br><span class="line">  ctx.<span class="property">res</span>.<span class="title function_">write</span>(chunk);  <span class="comment">// 写入响应流</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：使用 <code>ctx.res.write()</code> 而不是直接 <code>ctx.body =</code>，因为需要逐块写入。</p>
+<h3 id="5-聊天记录存储"><a href="#5-聊天记录存储" class="headerlink" title="5. 聊天记录存储"></a>5. 聊天记录存储</h3><h4 id="5-1-存储流程"><a href="#5-1-存储流程" class="headerlink" title="5.1 存储流程"></a>5.1 存储流程</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">保存聊天记录 → 生成/使用sessionId → 存储到Redis</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-2-核心实现"><a href="#5-2-核心实现" class="headerlink" title="5.2 核心实现"></a>5.2 核心实现</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// controller/chathistory.js`</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">saveChatHistory</span>(<span class="params">ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; messages, sessionId &#125; = ctx.<span class="property">request</span>.<span class="property">body</span>;</span><br><span class="line">  <span class="keyword">await</span> validate.<span class="title function_">isarrayCheck</span>(messages, <span class="string">&quot;请上传聊天记录&quot;</span>, <span class="string">&quot;messages&quot;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 生成或使用已有sessionId</span></span><br><span class="line">  <span class="keyword">let</span> session_id = <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="keyword">if</span> (sessionId) &#123;</span><br><span class="line">    session_id = sessionId;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> year = <span class="title function_">dayjs</span>().<span class="title function_">format</span>(<span class="string">&quot;YYYYMMDD&quot;</span>);</span><br><span class="line">    <span class="keyword">const</span> time = <span class="title function_">dayjs</span>().<span class="title function_">format</span>(<span class="string">&quot;HHmmssSSS&quot;</span>);</span><br><span class="line">    session_id = year + time;  <span class="comment">// 格式：20231225143500012</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> openid = ctx.<span class="property">auth</span>.<span class="property">uid</span>;  <span class="comment">// 从认证中间件获取用户ID</span></span><br><span class="line">  <span class="keyword">const</span> time = <span class="title function_">dayjs</span>().<span class="title function_">format</span>(<span class="string">&quot;YYYY-MM-DD&quot;</span>);</span><br><span class="line">  <span class="keyword">const</span> timeStamp = <span class="title function_">dayjs</span>().<span class="title function_">valueOf</span>();</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// Redis存储结构</span></span><br><span class="line">  <span class="keyword">const</span> key = <span class="string">`chat:<span class="subst">$&#123;openid&#125;</span>`</span>;</span><br><span class="line">  <span class="keyword">const</span> sessionKey = <span class="string">`chat:<span class="subst">$&#123;openid&#125;</span>:<span class="subst">$&#123;session_id&#125;</span>`</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 存储用户的会话id列表</span></span><br><span class="line">  ctx.<span class="property">redis</span>.<span class="title function_">zadd</span>(key, timeStamp, session_id);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 存储聊天记录（使用ZSET，便于按时间排序）</span></span><br><span class="line">  <span class="keyword">const</span> messageId = crypto.<span class="title function_">randomUUID</span>();</span><br><span class="line">  <span class="keyword">const</span> messageContent = <span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; time, messageId, ...messages &#125;);</span><br><span class="line">  ctx.<span class="property">redis</span>.<span class="title function_">zadd</span>(sessionKey, timeStamp, messageContent);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 如果是新会话，返回会话信息</span></span><br><span class="line">  <span class="keyword">if</span> (sessionId) &#123;</span><br><span class="line">    ctx.<span class="title function_">send</span>();  <span class="comment">// 已存在会话，不返回</span></span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> result = <span class="keyword">await</span> <span class="keyword">new</span> <span class="title class_">ChathistoryService</span>(ctx).<span class="title function_">newChatHistory</span>(openid, session_id);</span><br><span class="line">    ctx.<span class="title function_">send</span>(result);  <span class="comment">// 返回新会话信息</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="5-3-Redis存储结构"><a href="#5-3-Redis存储结构" class="headerlink" title="5.3 Redis存储结构"></a>5.3 Redis存储结构</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Key: chat:openid</span><br><span class="line">Value: ZSET (按时间戳排序的会话ID列表)</span><br><span class="line"></span><br><span class="line">Key: chat:openid:sessionId</span><br><span class="line">Value: ZSET (按时间戳排序的聊天消息)</span><br></pre></td></tr></table></figure>
+
+<p><strong>示例</strong>：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chat:abc123 → [&quot;20231225143500012&quot;, &quot;20231225154000045&quot;]</span><br><span class="line">chat:abc123:20231225143500012 → [</span><br><span class="line">  &#x27;&#123;&quot;time&quot;:&quot;2023-12-25&quot;,&quot;messageId&quot;:&quot;xxx&quot;, &quot;role&quot;:&quot;user&quot;,&quot;content&quot;:&quot;你好&quot;&#125;&#x27;,</span><br><span class="line">  &#x27;&#123;&quot;time&quot;:&quot;2023-12-25&quot;,&quot;messageId&quot;:&quot;yyy&quot;, &quot;role&quot;:&quot;assistant&quot;,&quot;content&quot;:&quot;你好！我是AI助手&quot;&#125;&#x27;</span><br><span class="line">]</span><br></pre></td></tr></table></figure>
+
+<h3 id="6-获取聊天记录"><a href="#6-获取聊天记录" class="headerlink" title="6. 获取聊天记录"></a>6. 获取聊天记录</h3><h4 id="6-1-获取聊天列表"><a href="#6-1-获取聊天列表" class="headerlink" title="6.1 获取聊天列表"></a>6.1 获取聊天列表</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">fetchChatHistory</span>(<span class="params">ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> openid = ctx.<span class="property">auth</span>.<span class="property">uid</span>;</span><br><span class="line">  <span class="keyword">const</span> key = <span class="string">`chat:<span class="subst">$&#123;openid&#125;</span>`</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取所有会话ID（按时间倒序）</span></span><br><span class="line">  <span class="keyword">const</span> sessionIds = <span class="keyword">await</span> ctx.<span class="property">redis</span>.<span class="title function_">zrevrange</span>(key, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">let</span> chatHistory = [];</span><br><span class="line">  <span class="keyword">for</span> (<span class="keyword">const</span> itemids <span class="keyword">of</span> sessionIds) &#123;</span><br><span class="line">    <span class="comment">// 获取每个会话的第一条消息</span></span><br><span class="line">    <span class="keyword">const</span> messages = <span class="keyword">await</span> ctx.<span class="property">redis</span>.<span class="title function_">zrange</span>(<span class="string">`chat:<span class="subst">$&#123;openid&#125;</span>:<span class="subst">$&#123;itemids&#125;</span>`</span>, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">    <span class="keyword">const</span> messageContent = messages.<span class="title function_">map</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> <span class="title class_">JSON</span>.<span class="title function_">parse</span>(item));</span><br><span class="line">    <span class="keyword">const</span> firstMessage = messageContent[<span class="number">0</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">const</span> sessiontData = &#123;</span><br><span class="line">      <span class="attr">session_id</span>: itemids,</span><br><span class="line">      <span class="attr">message</span>: [&#123;</span><br><span class="line">        <span class="attr">content</span>: firstMessage[<span class="number">0</span>].<span class="property">content</span>,</span><br><span class="line">        <span class="attr">role</span>: firstMessage[<span class="number">0</span>].<span class="property">role</span>,</span><br><span class="line">      &#125;],</span><br><span class="line">      <span class="attr">time</span>: firstMessage.<span class="property">time</span>,</span><br><span class="line">    &#125;;</span><br><span class="line">    chatHistory.<span class="title function_">push</span>(sessiontData);</span><br><span class="line">  &#125;</span><br><span class="line">  ctx.<span class="title function_">send</span>(chatHistory);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="6-2-获取单个会话详情"><a href="#6-2-获取单个会话详情" class="headerlink" title="6.2 获取单个会话详情"></a>6.2 获取单个会话详情</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">onliChatHistory</span>(<span class="params">ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; sessionId &#125; = ctx.<span class="property">query</span>;</span><br><span class="line">  <span class="keyword">const</span> openid = ctx.<span class="property">auth</span>.<span class="property">uid</span>;</span><br><span class="line">  <span class="keyword">const</span> key = <span class="string">`chat:<span class="subst">$&#123;openid&#125;</span>:<span class="subst">$&#123;sessionId&#125;</span>`</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取会话的所有消息</span></span><br><span class="line">  <span class="keyword">const</span> messages = <span class="keyword">await</span> ctx.<span class="property">redis</span>.<span class="title function_">zrange</span>(key, <span class="number">0</span>, -<span class="number">1</span>);</span><br><span class="line">  <span class="keyword">const</span> messageContent = messages.<span class="title function_">map</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> <span class="title class_">JSON</span>.<span class="title function_">parse</span>(item));</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 转换为标准messages格式</span></span><br><span class="line">  <span class="keyword">const</span> chatData = [];</span><br><span class="line">  messageContent.<span class="title function_">forEach</span>(<span class="function">(<span class="params">item</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> keys = <span class="title class_">Object</span>.<span class="title function_">keys</span>(item);</span><br><span class="line">    keys.<span class="title function_">forEach</span>(<span class="function">(<span class="params">key</span>) =&gt;</span> &#123;</span><br><span class="line">      <span class="keyword">if</span> (key !== <span class="string">&quot;time&quot;</span> &amp;&amp; key !== <span class="string">&quot;messageId&quot;</span>) &#123;</span><br><span class="line">        chatData.<span class="title function_">push</span>(item[key]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">  &#125;);</span><br><span class="line">  ctx.<span class="title function_">send</span>(chatData);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h3><p>** 添加请求限制**</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加限流中间件</span></span><br><span class="line"><span class="keyword">const</span> rateLimit = <span class="built_in">require</span>(<span class="string">&quot;koa-rate-limit&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> limiter = <span class="title function_">rateLimit</span>(&#123;</span><br><span class="line">  <span class="attr">interval</span>: <span class="number">60000</span>,  <span class="comment">// 1分钟</span></span><br><span class="line">  <span class="attr">max</span>: <span class="number">10</span>,          <span class="comment">// 最多10次请求</span></span><br><span class="line">&#125;);</span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&quot;/create-completions&quot;</span>, limiter, authority, zhipu.<span class="property">createCompletions</span>);</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2024/10/28/websocket%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="TGG">
+      <meta itemprop="description" content="一名立志成为全栈工程师的程序媛">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGG的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/10/28/websocket%E5%8D%8F%E8%AE%AE/" class="post-title-link" itemprop="url">websocket协议</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-10-28 13:59:38" itemprop="dateCreated datePublished" datetime="2024-10-28T13:59:38+08:00">2024-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-28 15:18:29" itemprop="dateModified" datetime="2025-10-28T15:18:29+08:00">2025-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">浏览器协议</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h1 id="WebSocket-vs-SSE：流式数据传输的技术选型"><a href="#WebSocket-vs-SSE：流式数据传输的技术选型" class="headerlink" title="WebSocket vs SSE：流式数据传输的技术选型"></a>WebSocket vs SSE：流式数据传输的技术选型</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在实时应用开发中，选择合适的通信协议至关重要。WebSocket 和 SSE（Server-Sent Events）是两种常用的流式数据传输技术，各自有不同的应用场景和优势。本文将深入分析这两种技术，并根据不同业务场景提供选型建议。</p>
+<hr>
+<h2 id="核心技术对比"><a href="#核心技术对比" class="headerlink" title="核心技术对比"></a>核心技术对比</h2><h3 id="SSE-Server-Sent-Events"><a href="#SSE-Server-Sent-Events" class="headerlink" title="SSE (Server-Sent Events)"></a>SSE (Server-Sent Events)</h3><p><strong>核心特征：</strong></p>
+<ul>
+<li>📡 单向通信：服务端 → 客户端</li>
+<li>🔗 基于 HTTP 长连接</li>
+<li>🔄 自动重连机制</li>
+<li>📝 仅支持文本数据</li>
+<li>🚀 实现简单</li>
+</ul>
+<p><strong>工作机制：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="keyword">const</span> eventSource = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">&#x27;/stream&#x27;</span>)</span><br><span class="line"></span><br><span class="line">eventSource.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务端响应格式（SSE）</span></span><br><span class="line"><span class="comment">// data: &#123;&quot;message&quot;: &quot;Hello&quot;&#125;</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// data: &#123;&quot;message&quot;: &quot;World&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><p><strong>核心特征：</strong></p>
+<ul>
+<li>📱 双向通信：服务端 ⇄ 客户端</li>
+<li>🔌 独立协议（ws:&#x2F;&#x2F;, wss:&#x2F;&#x2F;）</li>
+<li>⚙️ 需手动实现重连</li>
+<li>📦 支持文本和二进制数据</li>
+<li>🎯 低延迟、高性能</li>
+</ul>
+<p><strong>工作机制：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&#x27;ws://example.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">data</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ws.<span class="title function_">send</span>(<span class="string">&#x27;发送消息到服务器&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="功能特性对比表"><a href="#功能特性对比表" class="headerlink" title="功能特性对比表"></a>功能特性对比表</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>SSE</th>
+<th>WebSocket</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>通信方向</strong></td>
+<td>单向（服务端→客户端）</td>
+<td>双向（全双工）</td>
+<td>SSE 适合推送场景</td>
+</tr>
+<tr>
+<td><strong>协议基础</strong></td>
+<td>HTTP&#x2F;1.1</td>
+<td>独立协议</td>
+<td>SSE 更轻量</td>
+</tr>
+<tr>
+<td><strong>数据格式</strong></td>
+<td>仅文本（UTF-8）</td>
+<td>文本 + 二进制</td>
+<td>WebSocket 功能更全</td>
+</tr>
+<tr>
+<td><strong>自动重连</strong></td>
+<td>✅ 浏览器原生支持</td>
+<td>❌ 需手动实现</td>
+<td>SSE 更省事</td>
+</tr>
+<tr>
+<td><strong>实现复杂度</strong></td>
+<td>⭐ 简单</td>
+<td>⭐⭐ 中等</td>
+<td>SSE 开发更快</td>
+</tr>
+<tr>
+<td><strong>浏览器兼容</strong></td>
+<td>现代浏览器</td>
+<td>兼容性极好</td>
+<td>WebSocket 历史更久</td>
+</tr>
+<tr>
+<td><strong>服务器开销</strong></td>
+<td>较低</td>
+<td>较高（需心跳维持）</td>
+<td>SSE 资源占用少</td>
+</tr>
+<tr>
+<td><strong>代理友好</strong></td>
+<td>✅ 完全兼容 HTTP 代理</td>
+<td>⚠️ 需要特殊配置</td>
+<td>SSE 部署更简单</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="技术选型分析"><a href="#技术选型分析" class="headerlink" title="技术选型分析"></a>技术选型分析</h2><h3 id="场景一：AI-对话流式输出-✅-SSE"><a href="#场景一：AI-对话流式输出-✅-SSE" class="headerlink" title="场景一：AI 对话流式输出 ✅ SSE"></a>场景一：AI 对话流式输出 ✅ SSE</h3><p><strong>典型应用：</strong> ChatGPT、Claude 等 AI 对话应用</p>
+<p><strong>为什么选择 SSE：</strong></p>
+<ul>
+<li>单向数据流：AI → 用户</li>
+<li>自动重连确保用户体验</li>
+<li>HTTP 协议穿透性强</li>
+<li>实现简单，维护成本低</li>
+</ul>
+<p><strong>项目实现示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// api/request.js - 微信小程序 SSE 实现</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">request</span> = (<span class="params">url, method, data = &#123;&#125;, enableChunked = <span class="literal">false</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> requestTask = wx.<span class="title function_">request</span>(&#123;</span><br><span class="line">        <span class="attr">url</span>: requestUrl + url,</span><br><span class="line">        method,</span><br><span class="line">        data,</span><br><span class="line">        <span class="attr">enableChunked</span>: <span class="literal">true</span>,  <span class="comment">// 启用分块传输</span></span><br><span class="line">        <span class="attr">header</span>: &#123; <span class="title class_">Authorization</span>: <span class="title function_">getToken</span>() &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 接收流式数据</span></span><br><span class="line">    requestTask.<span class="title function_">onChunkReceived</span>(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> arrayBuffer = response.<span class="property">data</span></span><br><span class="line">        <span class="keyword">const</span> arrayBufferss = <span class="keyword">new</span> <span class="title class_">Uint8Array</span>(arrayBuffer)</span><br><span class="line">        <span class="keyword">let</span> string = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ArrayBuffer 转字符串</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arrayBufferss.<span class="property">length</span>; i++)&#123;</span><br><span class="line">            string += <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(arrayBufferss[i])</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 解码并累积到 buffer</span></span><br><span class="line">        buffer += <span class="built_in">decodeURIComponent</span>(<span class="built_in">escape</span>(string))</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 按换行符分割 SSE 事件</span></span><br><span class="line">        <span class="keyword">while</span>(buffer.<span class="title function_">includes</span>(<span class="string">&#x27;\n&#x27;</span>))&#123;</span><br><span class="line">            <span class="keyword">const</span> index = buffer.<span class="title function_">indexOf</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            <span class="keyword">const</span> chunk = buffer.<span class="title function_">slice</span>(<span class="number">0</span>, index)</span><br><span class="line">            buffer = buffer.<span class="title function_">slice</span>(index + <span class="number">1</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 解析 data: 开头的 JSON 数据</span></span><br><span class="line">            <span class="keyword">if</span>(chunk.<span class="title function_">startsWith</span>(<span class="string">&#x27;data: &#x27;</span>) &amp;&amp; !chunk.<span class="title function_">includes</span>(<span class="string">&#x27;[DONE]&#x27;</span>))&#123;</span><br><span class="line">                <span class="keyword">const</span> jsonData = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(chunk.<span class="title function_">replace</span>(<span class="string">&#x27;data: &#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line">                <span class="title function_">chatbotMessage</span>().<span class="title function_">handleText</span>(jsonData)  <span class="comment">// 处理流式数据</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>数据流处理：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store/index.js - 状态管理</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">handleText</span>(<span class="params">objVal</span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> aiMessages = <span class="variable language_">this</span>.<span class="property">messages</span>[<span class="variable language_">this</span>.<span class="property">messages</span>.<span class="property">length</span> - <span class="number">1</span>]</span><br><span class="line">    aiMessages.<span class="property">finish_reason</span> = <span class="string">&#x27;respond&#x27;</span>  <span class="comment">// 状态：响应中</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 累积文本内容</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">receiveText</span> += objVal.<span class="property">choices</span>[<span class="number">0</span>].<span class="property">delta</span>.<span class="property">content</span> || <span class="string">&#x27;&#x27;</span></span><br><span class="line">    aiMessages.<span class="property">content</span> = <span class="variable language_">this</span>.<span class="property">receiveText</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 判断是否结束</span></span><br><span class="line">    <span class="keyword">if</span>(objVal.<span class="property">choices</span>[<span class="number">0</span>].<span class="property">finish_reason</span>)&#123;</span><br><span class="line">        aiMessages.<span class="property">finish_reason</span> = objVal.<span class="property">choices</span>[<span class="number">0</span>].<span class="property">finish_reason</span></span><br><span class="line">        <span class="comment">// 处理完成逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>优势总结：</strong></p>
+<ul>
+<li>✅ 微信小程序原生支持</li>
+<li>✅ 自动断线重连</li>
+<li>✅ HTTP 基础设施支持</li>
+<li>✅ 代码简洁，易于维护</li>
+</ul>
+<hr>
+<h3 id="场景二：实时聊天应用-✅-WebSocket"><a href="#场景二：实时聊天应用-✅-WebSocket" class="headerlink" title="场景二：实时聊天应用 ✅ WebSocket"></a>场景二：实时聊天应用 ✅ WebSocket</h3><p><strong>典型应用：</strong> 微信群聊、Slack、Discord</p>
+<p><strong>为什么选择 WebSocket：</strong></p>
+<ul>
+<li>需要双向通信</li>
+<li>低延迟要求</li>
+<li>支持二进制数据传输（图片、文件等）</li>
+<li>心跳机制保证连接稳定性</li>
+</ul>
+<p><strong>实现示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ChatWebSocket</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">url</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">url</span> = url</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span> = <span class="literal">null</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">reconnectInterval</span> = <span class="number">5000</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">heartbeatInterval</span> = <span class="number">30000</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">heartbeatTimer</span> = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">connect</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span> = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="variable language_">this</span>.<span class="property">url</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onopen</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;连接成功&#x27;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">startHeartbeat</span>()</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onmessage</span> = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> data = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(e.<span class="property">data</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">handleMessage</span>(data)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onclose</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;连接关闭&#x27;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">stopHeartbeat</span>()</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">reconnect</span>()</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onerror</span> = <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;WebSocket 错误:&#x27;</span>, error)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">send</span>(<span class="params">message</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">readyState</span> === <span class="title class_">WebSocket</span>.<span class="property">OPEN</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(message))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">reconnect</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;尝试重连...&#x27;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">connect</span>()</span><br><span class="line">        &#125;, <span class="variable language_">this</span>.<span class="property">reconnectInterval</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">startHeartbeat</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">heartbeatTimer</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">send</span>(&#123; <span class="attr">type</span>: <span class="string">&#x27;ping&#x27;</span> &#125;)</span><br><span class="line">        &#125;, <span class="variable language_">this</span>.<span class="property">heartbeatInterval</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">stopHeartbeat</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">heartbeatTimer</span>) &#123;</span><br><span class="line">            <span class="built_in">clearInterval</span>(<span class="variable language_">this</span>.<span class="property">heartbeatTimer</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">close</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">stopHeartbeat</span>()</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="title function_">close</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line"><span class="keyword">const</span> chat = <span class="keyword">new</span> <span class="title class_">ChatWebSocket</span>(<span class="string">&#x27;wss://chat.example.com&#x27;</span>)</span><br><span class="line">chat.<span class="title function_">on</span>(<span class="string">&#x27;message&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 处理消息</span></span><br><span class="line">&#125;)</span><br><span class="line">chat.<span class="title function_">send</span>(&#123; <span class="attr">type</span>: <span class="string">&#x27;text&#x27;</span>, <span class="attr">content</span>: <span class="string">&#x27;Hello&#x27;</span> &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>优势总结：</strong></p>
+<ul>
+<li>✅ 双向实时通信</li>
+<li>✅ 支持复杂交互</li>
+<li>✅ 低延迟、高性能</li>
+<li>✅ 二进制数据传输</li>
+</ul>
+<hr>
+<h3 id="场景三：实时监控大屏-✅-SSE"><a href="#场景三：实时监控大屏-✅-SSE" class="headerlink" title="场景三：实时监控大屏 ✅ SSE"></a>场景三：实时监控大屏 ✅ SSE</h3><p><strong>典型应用：</strong> 服务器监控、数据大屏、日志系统</p>
+<p><strong>为什么选择 SSE：</strong></p>
+<ul>
+<li>单向数据推送</li>
+<li>自动重连保证数据完整性</li>
+<li>实现简单，运维成本低</li>
+<li>HTTP 基础设施支持</li>
+</ul>
+<p><strong>实现示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监控系统</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MonitorSSE</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">url, callbacks</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">url</span> = url</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span> = <span class="literal">null</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">callbacks</span> = callbacks</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">connect</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span> = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="variable language_">this</span>.<span class="property">url</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span>.<span class="property">onopen</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;监控连接已建立&#x27;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="property">onOpen</span>?.()</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span>.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> data = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="property">onMessage</span>?.(data)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span>.<span class="property">onerror</span> = <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;监控连接错误:&#x27;</span>, error)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="property">onError</span>?.(error)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">close</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span>?.<span class="title function_">close</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line"><span class="keyword">const</span> monitor = <span class="keyword">new</span> <span class="title class_">MonitorSSE</span>(<span class="string">&#x27;/monitor/stream&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">onMessage</span>: <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">updateDashboard</span>(data)  <span class="comment">// 更新监控面板</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">monitor.<span class="title function_">connect</span>()</span><br></pre></td></tr></table></figure>
+
+<p><strong>优势总结：</strong></p>
+<ul>
+<li>✅ 自动重连机制</li>
+<li>✅ 资源占用低</li>
+<li>✅ 部署简单</li>
+<li>✅ 监控数据完整性</li>
+</ul>
+<hr>
+<h3 id="场景四：协同编辑-✅-WebSocket"><a href="#场景四：协同编辑-✅-WebSocket" class="headerlink" title="场景四：协同编辑 ✅ WebSocket"></a>场景四：协同编辑 ✅ WebSocket</h3><p><strong>典型应用：</strong> Google Docs、Notion、腾讯文档</p>
+<p><strong>为什么选择 WebSocket：</strong></p>
+<ul>
+<li>多端实时同步</li>
+<li>低延迟操作反馈</li>
+<li>冲突检测和解决</li>
+<li>支持复杂状态管理</li>
+</ul>
+<p><strong>实现示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CollaborativeEditor</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">docId</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">docId</span> = docId</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span> = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">`ws://example.com/docs/<span class="subst">$&#123;docId&#125;</span>`</span>)</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">operations</span> = []</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">socketReady</span> = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">connect</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onopen</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">socketReady</span> = <span class="literal">true</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">send</span>(&#123; <span class="attr">type</span>: <span class="string">&#x27;join&#x27;</span>, <span class="attr">docId</span>: <span class="variable language_">this</span>.<span class="property">docId</span> &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> &#123; type, data &#125; = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">switch</span>(type) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;operation&#x27;</span>:</span><br><span class="line">                    <span class="variable language_">this</span>.<span class="title function_">applyOperation</span>(data)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;cursor&#x27;</span>:</span><br><span class="line">                    <span class="variable language_">this</span>.<span class="title function_">updateCursor</span>(data)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;user_joined&#x27;</span>:</span><br><span class="line">                    <span class="variable language_">this</span>.<span class="title function_">userJoined</span>(data)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">sendOperation</span>(<span class="params">operation</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">socketReady</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">                <span class="attr">type</span>: <span class="string">&#x27;operation&#x27;</span>,</span><br><span class="line">                <span class="attr">data</span>: operation</span><br><span class="line">            &#125;))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">applyOperation</span>(<span class="params">operation</span>) &#123;</span><br><span class="line">        <span class="comment">// 应用其他用户的编辑操作</span></span><br><span class="line">        <span class="title function_">transformOperation</span>(operation, <span class="variable language_">this</span>.<span class="property">operations</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="场景五：股票行情推送-✅-SSE"><a href="#场景五：股票行情推送-✅-SSE" class="headerlink" title="场景五：股票行情推送 ✅ SSE"></a>场景五：股票行情推送 ✅ SSE</h3><p><strong>典型应用：</strong> 实时行情、体育比分、加密货币价格</p>
+<p><strong>为什么选择 SSE：</strong></p>
+<ul>
+<li>海量实时推送数据</li>
+<li>高并发连接</li>
+<li>自动重连保证数据连续性</li>
+<li>简单可靠的实现</li>
+</ul>
+<p><strong>实现示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">StockTicker</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">symbols</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">symbols</span> = symbols</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span> = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">`/stocks?symbols=<span class="subst">$&#123;symbols.join(<span class="string">&#x27;,&#x27;</span>)&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">subscribe</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span>.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> data = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>)</span><br><span class="line">            <span class="title function_">callback</span>(data)  <span class="comment">// 更新价格</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="实际项目中的混合使用"><a href="#实际项目中的混合使用" class="headerlink" title="实际项目中的混合使用"></a>实际项目中的混合使用</h2><p>很多现代应用会同时使用两种技术：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 SSE 处理服务器推送</span></span><br><span class="line"><span class="keyword">const</span> notifications = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">&#x27;/api/notifications&#x27;</span>)</span><br><span class="line"></span><br><span class="line">notifications.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> notification = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>)</span><br><span class="line">    <span class="title function_">displayNotification</span>(notification)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 WebSocket 处理交互</span></span><br><span class="line"><span class="keyword">const</span> chatSocket = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&#x27;ws://chat.example.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line">chatSocket.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> message = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>)</span><br><span class="line">    <span class="title function_">appendMessage</span>(message)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">chatSocket.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; </span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;message&#x27;</span>, </span><br><span class="line">    <span class="attr">text</span>: userInput </span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="决策流程图"><a href="#决策流程图" class="headerlink" title="决策流程图"></a>决策流程图</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">开始选择</span><br><span class="line">    │</span><br><span class="line">    ├── 需要客户端主动发送数据？</span><br><span class="line">    │   │</span><br><span class="line">    │   ├── 否 → [SSE]</span><br><span class="line">    │   │   │</span><br><span class="line">    │   │   └── 特征：</span><br><span class="line">    │   │       ✅ 简单实现</span><br><span class="line">    │   │       ✅ 自动重连</span><br><span class="line">    │   │       ✅ 代理友好</span><br><span class="line">    │   │</span><br><span class="line">    │   └── 是 → 需要二进制数据？</span><br><span class="line">    │       │</span><br><span class="line">    │       ├── 否 → 考虑 [SSE]（简单场景）</span><br><span class="line">    │       │</span><br><span class="line">    │       └── 是 → [WebSocket]</span><br><span class="line">    │           │</span><br><span class="line">    │           └── 特征：</span><br><span class="line">    │               ✅ 双向通信</span><br><span class="line">    │               ✅ 低延迟</span><br><span class="line">    │               ✅ 功能完整</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="使用场景决策表"><a href="#使用场景决策表" class="headerlink" title="使用场景决策表"></a>使用场景决策表</h2><table>
+<thead>
+<tr>
+<th>应用场景</th>
+<th>推荐技术</th>
+<th>关键因素</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AI 对话&#x2F;文本生成</strong></td>
+<td>SSE</td>
+<td>单向流式推送，简单可靠</td>
+</tr>
+<tr>
+<td><strong>实时聊天</strong></td>
+<td>WebSocket</td>
+<td>双向交互，即时响应</td>
+</tr>
+<tr>
+<td><strong>实时监控</strong></td>
+<td>SSE</td>
+<td>单向数据推送，成本低</td>
+</tr>
+<tr>
+<td><strong>在线游戏</strong></td>
+<td>WebSocket</td>
+<td>双向、低延迟、二进制</td>
+</tr>
+<tr>
+<td><strong>文件传输</strong></td>
+<td>WebSocket</td>
+<td>二进制支持</td>
+</tr>
+<tr>
+<td><strong>通知推送</strong></td>
+<td>SSE</td>
+<td>简单实现，自动重连</td>
+</tr>
+<tr>
+<td><strong>协同编辑</strong></td>
+<td>WebSocket</td>
+<td>实时同步、冲突解决</td>
+</tr>
+<tr>
+<td><strong>股票行情</strong></td>
+<td>SSE</td>
+<td>高频推送，自动重连</td>
+</tr>
+<tr>
+<td><strong>直播弹幕</strong></td>
+<td>WebSocket</td>
+<td>双向、实时交互</td>
+</tr>
+<tr>
+<td><strong>IoT 设备控制</strong></td>
+<td>WebSocket</td>
+<td>双向控制，实时响应</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h2><h3 id="SSE-性能特点"><a href="#SSE-性能特点" class="headerlink" title="SSE 性能特点"></a>SSE 性能特点</h3><ul>
+<li><strong>连接数：</strong> 可支持数万并发连接</li>
+<li><strong>延迟：</strong> 略高于 WebSocket（HTTP 开销）</li>
+<li><strong>资源占用：</strong> 低，单连接占用少</li>
+<li><strong>适用：</strong> 高并发推送场景</li>
+</ul>
+<h3 id="WebSocket-性能特点"><a href="#WebSocket-性能特点" class="headerlink" title="WebSocket 性能特点"></a>WebSocket 性能特点</h3><ul>
+<li><strong>连接数：</strong> 受限于服务器资源（通常几千）</li>
+<li><strong>延迟：</strong> 极低，适合实时交互</li>
+<li><strong>资源占用：</strong> 较高（需心跳保活）</li>
+<li><strong>适用：</strong> 低延迟、双向通信场景</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="选择-SSE-的场景"><a href="#选择-SSE-的场景" class="headerlink" title="选择 SSE 的场景"></a>选择 SSE 的场景</h3><ol>
+<li>✅ 单向数据推送（AI 对话、监控、通知）</li>
+<li>✅ 需要简单可靠的实现</li>
+<li>✅ 需要自动重连机制</li>
+<li>✅ 需要穿透各种代理和防火墙</li>
+<li>✅ 数据量大的高频推送</li>
+</ol>
+<h3 id="选择-WebSocket-的场景"><a href="#选择-WebSocket-的场景" class="headerlink" title="选择 WebSocket 的场景"></a>选择 WebSocket 的场景</h3><ol>
+<li>✅ 需要双向实时通信</li>
+<li>✅ 需要发送二进制数据</li>
+<li>✅ 需要极低延迟</li>
+<li>✅ 需要复杂的交互逻辑</li>
+<li>✅ 需要全双工通信</li>
+</ol>
+<h3 id="最佳实践建议"><a href="#最佳实践建议" class="headerlink" title="最佳实践建议"></a>最佳实践建议</h3><ol>
+<li><strong>单一职责原则</strong>：根据功能选择合适技术</li>
+<li><strong>混合使用</strong>：同一应用可同时使用两种技术</li>
+<li><strong>渐进增强</strong>：从简单场景开始，逐步优化</li>
+<li><strong>错误处理</strong>：完善的异常处理和重连机制</li>
+<li><strong>性能监控</strong>：实时监控连接状态和数据流</li>
+</ol>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">MDN: Server-Sent Events</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket">MDN: WebSocket API</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html">微信小程序：enableChunked 分块传输</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/network/download/wx.RequestTask.onChunkReceived.html">微信小程序：onChunkReceived 监听数据包接收</a></li>
+</ul>
+<hr>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2024/10/28/%E6%96%87%E7%94%9F%E5%9B%BE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="TGG">
+      <meta itemprop="description" content="一名立志成为全栈工程师的程序媛">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGG的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/10/28/%E6%96%87%E7%94%9F%E5%9B%BE/" class="post-title-link" itemprop="url">大模型应用--文生图</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-10-28 13:03:43" itemprop="dateCreated datePublished" datetime="2024-10-28T13:03:43+08:00">2024-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-28 15:18:33" itemprop="dateModified" datetime="2025-10-28T15:18:33+08:00">2025-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" itemprop="url" rel="index"><span itemprop="name">大模型应用</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="完整流程"><a href="#完整流程" class="headerlink" title="完整流程"></a>完整流程</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">前端请求 → 参数验证 → 调用智谱AI图片生成 → 返回图片URL → 前端展示</span><br></pre></td></tr></table></figure>
+
+
+<h4 id="1-文生图接口"><a href="#1-文生图接口" class="headerlink" title="1. 文生图接口"></a>1. 文生图接口</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// controller/zhipuai.js</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">createImages</span>(<span class="params">ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; prompt &#125; = ctx.<span class="property">request</span>.<span class="property">body</span>;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 参数验证：确保prompt不为空</span></span><br><span class="line">  <span class="keyword">await</span> <span class="title class_">Validate</span>.<span class="title function_">nullCheck</span>(prompt, <span class="string">&quot;请输入图像的文本描述&quot;</span>, <span class="string">&quot;prompt&quot;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 调用智谱AI图片生成API</span></span><br><span class="line">  <span class="keyword">const</span> imageData = <span class="keyword">await</span> ai.<span class="title function_">createImages</span>(&#123;</span><br><span class="line">    <span class="attr">model</span>: <span class="string">&quot;cogview-4&quot;</span>,  <span class="comment">// 使用CogView-4模型</span></span><br><span class="line">    prompt,              <span class="comment">// 图片描述文本</span></span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 返回图片URL和提示信息</span></span><br><span class="line">  ctx.<span class="title function_">send</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: imageData.<span class="property">data</span>[<span class="number">0</span>].<span class="property">url</span>,               <span class="comment">// 图片URL</span></span><br><span class="line">    <span class="attr">prompt</span>: <span class="string">&quot;我已为你生成对应的图片,你可以继续问我!&quot;</span>,  <span class="comment">// 固定提示</span></span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="2-智谱AI图片生成API"><a href="#2-智谱AI图片生成API" class="headerlink" title="2. 智谱AI图片生成API"></a>2. 智谱AI图片生成API</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">ZhipuAI</span> &#125; = <span class="built_in">require</span>(<span class="string">&quot;zhipuai-sdk-nodejs-v4&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; apiKey &#125; = <span class="built_in">require</span>(<span class="string">&quot;@/config/default&quot;</span>).<span class="property">zhipu</span>;</span><br><span class="line"><span class="keyword">const</span> ai = <span class="keyword">new</span> <span class="title class_">ZhipuAI</span>(&#123; apiKey &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 调用</span></span><br><span class="line"><span class="keyword">await</span> ai.<span class="title function_">createImages</span>(&#123;</span><br><span class="line">  <span class="attr">model</span>: <span class="string">&quot;cogview-3&quot;</span>,  <span class="comment">// 图片生成模型</span></span><br><span class="line">  <span class="attr">prompt</span>: <span class="string">&quot;一只可爱的小猫&quot;</span>, <span class="comment">// 图片描述</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-接口路由"><a href="#3-接口路由" class="headerlink" title="3. 接口路由"></a>3. 接口路由</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// router.js</span></span><br><span class="line"><span class="keyword">const</span> authority = <span class="built_in">require</span>(<span class="string">&quot;@/config/auth&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 文生图（需要认证）</span></span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&quot;/create-images&quot;</span>, authority, zhipu.<span class="property">createImages</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="补充：CogView-4模型"><a href="#补充：CogView-4模型" class="headerlink" title="补充：CogView-4模型"></a>补充：CogView-4模型</h3><p><strong>CogView-4</strong> 是智谱AI的图片生成模型，支持：</p>
+<ul>
+<li>文本描述生成图片</li>
+<li>高质量的图片生成</li>
+<li>中文理解能力强</li>
+</ul>
+<h3 id="PS-智谱AI图片生成参数"><a href="#PS-智谱AI图片生成参数" class="headerlink" title="PS: 智谱AI图片生成参数"></a>PS: 智谱AI图片生成参数</h3><p>详细参数说明请参考：<a target="_blank" rel="noopener" href="https://bigmodel.cn/dev/howuse/image-generation-model/cogview-4">智谱AI CogView-4 官方文档</a></p>
+<h4 id="支持的参数"><a href="#支持的参数" class="headerlink" title="支持的参数"></a>支持的参数</h4><table>
+<thead>
+<tr>
+<th>参数</th>
+<th>类型</th>
+<th>说明</th>
+<th>可选值</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>model</td>
+<td>string</td>
+<td>模型名称</td>
+<td>“cogview-4”</td>
+</tr>
+<tr>
+<td>prompt</td>
+<td>string</td>
+<td>图片描述</td>
+<td>任意文本</td>
+</tr>
+<tr>
+<td>n</td>
+<td>number</td>
+<td>生成图片数量</td>
+<td>1-4（默认1）</td>
+</tr>
+<tr>
+<td>size</td>
+<td>string</td>
+<td>图片尺寸</td>
+<td>“1024x1024”, “512x512”</td>
+</tr>
+<tr>
+<td>quality</td>
+<td>string</td>
+<td>图片质量</td>
+<td>“hd”, “standard”</td>
+</tr>
+</tbody></table>
+<h4 id="返回的数据格式"><a href="#返回的数据格式" class="headerlink" title="返回的数据格式"></a>返回的数据格式</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="string">&quot;data&quot;</span>: [</span><br><span class="line">    &#123;</span><br><span class="line">      <span class="string">&quot;url&quot;</span>: <span class="string">&quot;https://example.com/image.jpg&quot;</span>,</span><br><span class="line">      <span class="string">&quot;revised_prompt&quot;</span>: <span class="string">&quot;一只可爱的小猫坐在花园里&quot;</span></span><br><span class="line">    &#125;</span><br><span class="line">  ],</span><br><span class="line">  <span class="string">&quot;created&quot;</span>: <span class="number">1234567890</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+<h3 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h3><p><strong>1. 添加请求限制</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 添加限流中间件</span></span><br><span class="line"><span class="keyword">const</span> rateLimit = <span class="built_in">require</span>(<span class="string">&quot;koa-rate-limit&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> limiter = <span class="title function_">rateLimit</span>(&#123;</span><br><span class="line">  <span class="attr">interval</span>: <span class="number">60000</span>,  <span class="comment">// 1分钟</span></span><br><span class="line">  <span class="attr">max</span>: <span class="number">5</span>,          <span class="comment">// 最多5次请求（图片生成消耗大）</span></span><br><span class="line">&#125;);</span><br><span class="line">router.<span class="title function_">post</span>(<span class="string">&quot;/create-images&quot;</span>, limiter, authority, zhipu.<span class="property">createImages</span>);</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. 控制图片数量和尺寸</strong></p>
+<p>智谱AI支持多种图片尺寸和数量，但当前实现未开放这些配置。</p>
+<p><strong>建议</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">async</span> <span class="title function_">createImages</span>(<span class="params">ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; prompt, n = <span class="number">1</span>, size = <span class="string">&quot;1024x1024&quot;</span> &#125; = ctx.<span class="property">request</span>.<span class="property">body</span>;</span><br><span class="line">  <span class="keyword">await</span> <span class="title class_">Validate</span>.<span class="title function_">nullCheck</span>(prompt, <span class="string">&quot;请输入图像的文本描述&quot;</span>, <span class="string">&quot;prompt&quot;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">const</span> imageData = <span class="keyword">await</span> ai.<span class="title function_">createImages</span>(&#123;</span><br><span class="line">    <span class="attr">model</span>: <span class="string">&quot;cogview-3&quot;</span>,</span><br><span class="line">    prompt,</span><br><span class="line">    <span class="attr">n</span>: <span class="built_in">parseInt</span>(n),</span><br><span class="line">    size,</span><br><span class="line">  &#125;);</span><br><span class="line">  </span><br><span class="line">  ctx.<span class="title function_">send</span>(&#123;</span><br><span class="line">    <span class="attr">url</span>: imageData.<span class="property">data</span>[<span class="number">0</span>].<span class="property">url</span>,</span><br><span class="line">    <span class="attr">urls</span>: imageData.<span class="property">data</span>.<span class="title function_">map</span>(<span class="function"><span class="params">item</span> =&gt;</span> item.<span class="property">url</span>), <span class="comment">// 返回所有图片URL</span></span><br><span class="line">    <span class="attr">prompt</span>: <span class="string">&quot;我已为你生成对应的图片,你可以继续问我!&quot;</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2024/10/25/%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="TGG">
+      <meta itemprop="description" content="一名立志成为全栈工程师的程序媛">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGG的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/10/25/%E7%99%BB%E5%BD%95%E5%8A%9F%E8%83%BD-%E5%B0%8F%E7%A8%8B%E5%BA%8F%E5%90%8E%E7%AB%AF/" class="post-title-link" itemprop="url">登录功能--小程序后端</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-10-25 12:07:11" itemprop="dateCreated datePublished" datetime="2024-10-25T12:07:11+08:00">2024-10-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-28 15:18:35" itemprop="dateModified" datetime="2025-10-28T15:18:35+08:00">2025-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%99%BB%E5%BD%95/" itemprop="url" rel="index"><span itemprop="name">登录</span></a>
+                </span>
+                  ，
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%99%BB%E5%BD%95/%E5%90%8E%E7%AB%AF%E5%BC%80%E5%8F%91/" itemprop="url" rel="index"><span itemprop="name">后端开发</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="一、传统账号密码登录"><a href="#一、传统账号密码登录" class="headerlink" title="一、传统账号密码登录"></a>一、传统账号密码登录</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">用户请求 → 参数验证 → 获取openid → 查询/创建用户 → 生成JWT → 返回结果</span><br></pre></td></tr></table></figure>
+
+<p><strong>详细步骤</strong>：</p>
+<ol>
+<li><strong>前端发起登录请求</strong> → <code>POST /wxlogin</code></li>
+<li><strong>后端接收并校验参数</strong> → 验证nickName、avatar、code</li>
+<li><strong>调用微信API获取openid</strong> → 通过code换取openid</li>
+<li><strong>数据库查询&#x2F;创建用户</strong> → 以openid为主键</li>
+<li><strong>生成JWT Token返回</strong> → 有效期100天</li>
+<li><strong>前端保存Token</strong> → 用于后续API调用</li>
+</ol>
+<h3 id="2-认证流程"><a href="#2-认证流程" class="headerlink" title="2. 认证流程"></a>2. 认证流程</h3><ul>
+<li>需要认证的接口使用 <code>authority</code> 中间件</li>
+<li>通过Basic Auth从请求头获取token</li>
+<li>验证JWT token有效性（包括过期检查）</li>
+<li>将用户信息注入 <code>ctx.auth.uid</code></li>
+</ul>
+<h3 id="3-流程分析"><a href="#3-流程分析" class="headerlink" title="3. 流程分析"></a>3. 流程分析</h3><h4 id="3-1-登录接口"><a href="#3-1-登录接口" class="headerlink" title="3.1 登录接口"></a>3.1 登录接口</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// controller/user.js</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">wxLogin</span>(<span class="params">ctx</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> &#123; nickName, avatar, code &#125; = ctx.<span class="property">request</span>.<span class="property">body</span>;</span><br><span class="line">  <span class="comment">// 参数验证</span></span><br><span class="line">  <span class="keyword">await</span> <span class="title class_">Validate</span>.<span class="title function_">nullCheck</span>(nickName, <span class="string">&quot;请输入昵称&quot;</span>, <span class="string">&quot;nickName&quot;</span>);</span><br><span class="line">  <span class="keyword">await</span> <span class="title class_">Validate</span>.<span class="title function_">nullCheck</span>(avatar, <span class="string">&quot;请上传头像&quot;</span>, <span class="string">&quot;avatar&quot;</span>);</span><br><span class="line">  <span class="keyword">await</span> <span class="title class_">Validate</span>.<span class="title function_">nullCheck</span>(code, <span class="string">&quot;缺少code&quot;</span>, <span class="string">&quot;code&quot;</span>);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 获取openid</span></span><br><span class="line">  <span class="keyword">const</span> openid = <span class="keyword">await</span> <span class="keyword">new</span> <span class="title class_">UserService</span>().<span class="title function_">getOpenid</span>(code);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 查询或创建用户</span></span><br><span class="line">  <span class="keyword">const</span> userInfo = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">findOne</span>(&#123; <span class="attr">where</span>: &#123; openid &#125; &#125;);</span><br><span class="line">  <span class="keyword">if</span> (!userInfo) &#123;</span><br><span class="line">    <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">create</span>(&#123; nickName, avatar, openid &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 返回token</span></span><br><span class="line">  ctx.<span class="title function_">send</span>(&#123; <span class="attr">token</span>: <span class="title function_">generateToken</span>(openid), nickName, avatar &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-获取OpenID"><a href="#3-2-获取OpenID" class="headerlink" title="3.2 获取OpenID"></a>3.2 获取OpenID</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// service/user.js</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">getOpenid</span>(<span class="params">code</span>) &#123;</span><br><span class="line">  <span class="keyword">const</span> query = qs.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">    appid, secret, <span class="attr">js_code</span>: code,</span><br><span class="line">    <span class="attr">grant_type</span>: <span class="string">&quot;authorization_code&quot;</span>,</span><br><span class="line">  &#125;);</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> axios.<span class="title function_">get</span>(<span class="string">`<span class="subst">$&#123;code2session&#125;</span>?<span class="subst">$&#123;query&#125;</span>`</span>);</span><br><span class="line">  <span class="keyword">if</span> (res.<span class="property">data</span>.<span class="property">errcode</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> &#123; <span class="attr">msg</span>: <span class="string">&quot;获取code出错&quot;</span>, <span class="attr">code</span>: <span class="number">400</span>, <span class="attr">error</span>: res.<span class="property">data</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> res.<span class="property">data</span>.<span class="property">openid</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-3-认证中间件"><a href="#3-3-认证中间件" class="headerlink" title="3.3 认证中间件"></a>3.3 认证中间件</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config/auth.js</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">authority</span> = <span class="keyword">async</span> (<span class="params">ctx, next</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">const</span> token = <span class="title function_">basicAuth</span>(ctx.<span class="property">req</span>);</span><br><span class="line">  <span class="keyword">if</span> (!token || !token.<span class="property">name</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> &#123; <span class="attr">msg</span>: <span class="string">&quot;没有登陆,没有访问权限&quot;</span>, <span class="attr">code</span>: <span class="number">401</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">var</span> authcode = jwt.<span class="title function_">verify</span>(token.<span class="property">name</span>, secretkey);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">    <span class="keyword">if</span> (error.<span class="property">name</span> == <span class="string">&quot;TokenExpiredError&quot;</span>) &#123;</span><br><span class="line">      <span class="keyword">throw</span> &#123; <span class="attr">msg</span>: <span class="string">&quot;登录过期,重新登陆&quot;</span>, <span class="attr">code</span>: <span class="number">401</span> &#125;;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">throw</span> &#123; <span class="attr">msg</span>: <span class="string">&quot;没有访问权限&quot;</span>, <span class="attr">code</span>: <span class="number">401</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">  ctx.<span class="property">auth</span> = &#123; <span class="attr">uid</span>: authcode.<span class="property">uid</span> &#125;;</span><br><span class="line">  <span class="keyword">await</span> <span class="title function_">next</span>();</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+
+<h3 id="4-数据库设计"><a href="#4-数据库设计" class="headerlink" title="4. 数据库设计"></a>4. 数据库设计</h3><p><strong>用户表结构</strong> </p>
+<ul>
+<li><code>nickName</code>: 用户昵称（必填字符串）</li>
+<li><code>avatar</code>: 用户头像URL（必填字符串）</li>
+<li><code>openid</code>: 微信用户唯一标识（主键，保证唯一性）</li>
+<li><code>createTime</code>: 创建时间（自动设置为当前时间）</li>
+</ul>
+<h3 id="⚠️-注意事项"><a href="#⚠️-注意事项" class="headerlink" title="⚠️ 注意事项"></a>⚠️ 注意事项</h3><p><strong>1. 配置文件防止暴露敏感信息</strong> </p>
+<ul>
+<li>❌ 微信AppID和Secret直接写在代码中</li>
+<li>❌ 阿里云AccessKey直接暴露</li>
+<li>❌ JWT密钥硬编码</li>
+<li>❌ MySQL数据库密码明文存储</li>
+</ul>
+<p>   <strong>解决方案</strong>：<br>   <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用环境变量</span></span><br><span class="line"><span class="attr">weiixn</span>: &#123;</span><br><span class="line">  <span class="attr">appid</span>: process.<span class="property">env</span>.<span class="property">WX_APPID</span>,</span><br><span class="line">  <span class="attr">secret</span>: process.<span class="property">env</span>.<span class="property">WX_SECRET</span>,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>   创建 <code>.env</code> 文件：<br>   <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">WX_APPID=xxx</span><br><span class="line">WX_SECRET=xxx</span><br><span class="line">DB_PASSWORD=xxx</span><br></pre></td></tr></table></figure></p>
+<h3 id="二、短信验证码登录"><a href="#二、短信验证码登录" class="headerlink" title="二、短信验证码登录"></a>二、短信验证码登录</h3><p>后续补充，敬请期待！</p>
+<h3 id="三、单点登录"><a href="#三、单点登录" class="headerlink" title="三、单点登录"></a>三、单点登录</h3><p>后续补充，敬请期待！</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2024/07/25/hello/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="TGG">
+      <meta itemprop="description" content="一名立志成为全栈工程师的程序媛">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGG的博客">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          
+            <a href="/2024/07/25/hello/" class="post-title-link" itemprop="url">Sequelize 在后端开发中的优势</a>
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-07-25 00:00:00" itemprop="dateCreated datePublished" datetime="2024-07-25T00:00:00+08:00">2024-07-25</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-28 15:18:34" itemprop="dateModified" datetime="2025-10-28T15:18:34+08:00">2025-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%A1%86%E6%9E%B6/" itemprop="url" rel="index"><span itemprop="name">框架</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="1-面向对象的模型定义"><a href="#1-面向对象的模型定义" class="headerlink" title="1. 面向对象的模型定义"></a>1. 面向对象的模型定义</h2><h3 id="传统方式的问题"><a href="#传统方式的问题" class="headerlink" title="传统方式的问题"></a>传统方式的问题</h3><p>在传统开发中，我们需要手动维护 SQL 语句和数据库结构的映射关系：</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 手动编写 SQL</span></span><br><span class="line"><span class="keyword">CREATE TABLE</span> `<span class="keyword">user</span><span class="operator">-</span>info` (</span><br><span class="line">  `nickName` <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  `avatar` <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT NULL</span>,</span><br><span class="line">  `openid` <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT NULL</span> <span class="keyword">PRIMARY KEY</span>,</span><br><span class="line">  `createTime` <span class="type">VARCHAR</span>(<span class="number">255</span>) <span class="keyword">NOT NULL</span> <span class="keyword">DEFAULT</span> <span class="string">&#x27;2024-01-01: 00:00:00&#x27;</span></span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sequelize-的优势"><a href="#Sequelize-的优势" class="headerlink" title="Sequelize 的优势"></a>Sequelize 的优势</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// model/user.js</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="built_in">require</span>(<span class="string">&quot;@/config/db&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">DataTypes</span> &#125; = <span class="built_in">require</span>(<span class="string">&quot;sequelize&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> dayjs = <span class="built_in">require</span>(<span class="string">&quot;dayjs&quot;</span>);</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">User</span> = db.<span class="title function_">define</span>(<span class="string">&quot;user-info&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">nickName</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">DataTypes</span>.<span class="property">STRING</span>,</span><br><span class="line">    <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">avatar</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">DataTypes</span>.<span class="property">STRING</span>,</span><br><span class="line">    <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">openid</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">DataTypes</span>.<span class="property">STRING</span>,</span><br><span class="line">    <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">primaryKey</span>: <span class="literal">true</span>, <span class="comment">// 设为主键，保证唯一性</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">createTime</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">DataTypes</span>.<span class="property">STRING</span>,</span><br><span class="line">    <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">defaultValue</span>: <span class="title function_">dayjs</span>().<span class="title function_">format</span>(<span class="string">&quot;YYYY-MM-DD: HH:mm:ss&quot;</span>),</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>优势分析：</strong></p>
+<ul>
+<li><strong>类型安全</strong>：避免字段名拼写错误</li>
+<li><strong>约束管理</strong>：集中定义主键、非空等约束</li>
+<li><strong>默认值</strong>：统一管理字段默认值</li>
+<li><strong>可维护性</strong>：模型即文档，结构清晰</li>
+</ul>
+<h2 id="2-简洁的查询语法"><a href="#2-简洁的查询语法" class="headerlink" title="2. 简洁的查询语法"></a>2. 简洁的查询语法</h2><h3 id="项目中的实际应用"><a href="#项目中的实际应用" class="headerlink" title="项目中的实际应用"></a>项目中的实际应用</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// controller/user.js</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">UserController</span> &#123;</span><br><span class="line">  <span class="keyword">async</span> <span class="title function_">wxLogin</span>(<span class="params">ctx</span>) &#123;</span><br><span class="line">    <span class="keyword">const</span> &#123; nickName, avatar, code &#125; = ctx.<span class="property">request</span>.<span class="property">body</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 获取 openid</span></span><br><span class="line">    <span class="keyword">const</span> openid = <span class="keyword">await</span> <span class="keyword">new</span> <span class="title class_">UserService</span>().<span class="title function_">getOpenid</span>(code);</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// Sequelize 查询：简洁直观</span></span><br><span class="line">    <span class="keyword">const</span> userInfo = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">findOne</span>(&#123; <span class="attr">where</span>: &#123; openid &#125; &#125;);</span><br><span class="line">    <span class="keyword">if</span> (!userInfo) &#123;</span><br><span class="line">      <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">create</span>(&#123; nickName, avatar, openid &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ctx.<span class="title function_">send</span>(&#123; <span class="attr">token</span>: <span class="title function_">generateToken</span>(openid), nickName, avatar &#125;);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="对比原生-SQL"><a href="#对比原生-SQL" class="headerlink" title="对比原生 SQL"></a>对比原生 SQL</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 不使用 Sequelize 的复杂写法</span></span><br><span class="line"><span class="keyword">const</span> connection = <span class="keyword">await</span> mysql.<span class="title function_">createConnection</span>(config);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询用户 - 需要手动处理参数化查询</span></span><br><span class="line"><span class="keyword">const</span> [rows] = <span class="keyword">await</span> connection.<span class="title function_">execute</span>(</span><br><span class="line">  <span class="string">&#x27;SELECT * FROM `user-info` WHERE openid = ?&#x27;</span>,</span><br><span class="line">  [openid]</span><br><span class="line">);</span><br><span class="line"><span class="keyword">const</span> userInfo = rows[<span class="number">0</span>];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 创建用户 - 需要手动处理字段映射</span></span><br><span class="line"><span class="keyword">if</span> (!userInfo) &#123;</span><br><span class="line">  <span class="keyword">await</span> connection.<span class="title function_">execute</span>(</span><br><span class="line">    <span class="string">&#x27;INSERT INTO `user-info` (nickName, avatar, openid, createTime) VALUES (?, ?, ?, ?)&#x27;</span>,</span><br><span class="line">    [nickName, avatar, openid, <span class="title function_">dayjs</span>().<span class="title function_">format</span>(<span class="string">&quot;YYYY-MM-DD: HH:mm:ss&quot;</span>)]</span><br><span class="line">  );</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>优势分析：</strong></p>
+<ul>
+<li><strong>代码简洁</strong>：链式调用，语义清晰</li>
+<li><strong>安全性</strong>：自动参数化查询，防止 SQL 注入</li>
+<li><strong>一致性</strong>：统一的 API 风格</li>
+<li><strong>可读性</strong>：业务逻辑更突出</li>
+</ul>
+<h2 id="3-自动同步表结构"><a href="#3-自动同步表结构" class="headerlink" title="3. 自动同步表结构"></a>3. 自动同步表结构</h2><h3 id="配置管理"><a href="#配置管理" class="headerlink" title="配置管理"></a>配置管理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config/db.js</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="title class_">Sequelize</span> &#125; = <span class="built_in">require</span>(<span class="string">&quot;sequelize&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> &#123; database, userName, password, host &#125; = <span class="built_in">require</span>(<span class="string">&quot;./default&quot;</span>).<span class="property">db</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> db = <span class="keyword">new</span> <span class="title class_">Sequelize</span>(database, userName, password, &#123;</span><br><span class="line">  host,</span><br><span class="line">  <span class="attr">dialect</span>: <span class="string">&quot;mysql&quot;</span>,</span><br><span class="line">  <span class="attr">logging</span>: <span class="literal">false</span>, <span class="comment">// 生产环境关闭 SQL 日志</span></span><br><span class="line">  <span class="attr">define</span>: &#123;</span><br><span class="line">    <span class="attr">freezeTableName</span>: <span class="literal">true</span>, <span class="comment">// 禁止自动给表名加复数</span></span><br><span class="line">    <span class="attr">timestamps</span>: <span class="literal">false</span>,     <span class="comment">// 禁止时间戳</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">sync</span>: &#123;</span><br><span class="line">    <span class="attr">force</span>: <span class="literal">false</span>, <span class="comment">// 不会强制删除现有表并且重新创建</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line">db.<span class="title function_">sync</span>(); <span class="comment">// 如果表不存在，就创建表</span></span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = db;</span><br></pre></td></tr></table></figure>
+
+<p><strong>优势分析：</strong></p>
+<ul>
+<li><strong>开发效率</strong>：模型定义即表结构，无需单独管理 DDL</li>
+<li><strong>一致性</strong>：确保代码与数据库结构同步</li>
+<li><strong>环境管理</strong>：通过配置控制同步行为</li>
+</ul>
+<h2 id="4-全局配置管理"><a href="#4-全局配置管理" class="headerlink" title="4. 全局配置管理"></a>4. 全局配置管理</h2><h3 id="统一配置的优势"><a href="#统一配置的优势" class="headerlink" title="统一配置的优势"></a>统一配置的优势</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// config/db.js 中的配置</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="keyword">new</span> <span class="title class_">Sequelize</span>(database, userName, password, &#123;</span><br><span class="line">  host,</span><br><span class="line">  <span class="attr">dialect</span>: <span class="string">&quot;mysql&quot;</span>,</span><br><span class="line">  <span class="attr">logging</span>: <span class="literal">false</span>,        <span class="comment">// 生产环境性能优化</span></span><br><span class="line">  <span class="attr">define</span>: &#123;</span><br><span class="line">    <span class="attr">freezeTableName</span>: <span class="literal">true</span>,  <span class="comment">// 保持表名不变</span></span><br><span class="line">    <span class="attr">timestamps</span>: <span class="literal">false</span>,       <span class="comment">// 不自动添加时间戳</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">sync</span>: &#123;</span><br><span class="line">    <span class="attr">force</span>: <span class="literal">false</span>,           <span class="comment">// 安全模式，不强制重建</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p><strong>配置项说明：</strong></p>
+<ul>
+<li><code>freezeTableName: true</code>：保持表名 <code>user-info</code> 不变，避免自动复数化</li>
+<li><code>timestamps: false</code>：不自动添加 <code>createdAt</code> 和 <code>updatedAt</code> 字段</li>
+<li><code>logging: false</code>：生产环境关闭 SQL 日志，提升性能</li>
+<li><code>force: false</code>：安全模式，不会意外删除现有数据</li>
+</ul>
+<h2 id="5-类型系统与数据映射"><a href="#5-类型系统与数据映射" class="headerlink" title="5. 类型系统与数据映射"></a>5. 类型系统与数据映射</h2><h3 id="Sequelize-数据类型"><a href="#Sequelize-数据类型" class="headerlink" title="Sequelize 数据类型"></a>Sequelize 数据类型</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 支持的数据类型</span></span><br><span class="line"><span class="title class_">DataTypes</span>.<span class="property">STRING</span>    <span class="comment">// VARCHAR</span></span><br><span class="line"><span class="title class_">DataTypes</span>.<span class="property">INTEGER</span>   <span class="comment">// INT</span></span><br><span class="line"><span class="title class_">DataTypes</span>.<span class="property">TEXT</span>      <span class="comment">// TEXT</span></span><br><span class="line"><span class="title class_">DataTypes</span>.<span class="property">DATE</span>      <span class="comment">// DATETIME</span></span><br><span class="line"><span class="title class_">DataTypes</span>.<span class="property">BOOLEAN</span>   <span class="comment">// TINYINT(1)</span></span><br><span class="line"><span class="title class_">DataTypes</span>.<span class="property">JSON</span>      <span class="comment">// JSON</span></span><br><span class="line"><span class="title class_">DataTypes</span>.<span class="property">DECIMAL</span>   <span class="comment">// DECIMAL</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="实际应用示例"><a href="#实际应用示例" class="headerlink" title="实际应用示例"></a>实际应用示例</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 扩展用户模型示例</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">User</span> = db.<span class="title function_">define</span>(<span class="string">&quot;user-info&quot;</span>, &#123;</span><br><span class="line">  <span class="attr">nickName</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">DataTypes</span>.<span class="title function_">STRING</span>(<span class="number">100</span>),  <span class="comment">// 限制长度</span></span><br><span class="line">    <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">validate</span>: &#123;</span><br><span class="line">      <span class="attr">len</span>: [<span class="number">1</span>, <span class="number">100</span>]  <span class="comment">// 长度验证</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">avatar</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">DataTypes</span>.<span class="title function_">STRING</span>(<span class="number">500</span>), <span class="comment">// URL 可能较长</span></span><br><span class="line">    <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">validate</span>: &#123;</span><br><span class="line">      <span class="attr">isUrl</span>: <span class="literal">true</span>  <span class="comment">// URL 格式验证</span></span><br><span class="line">    &#125;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">openid</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">DataTypes</span>.<span class="title function_">STRING</span>(<span class="number">50</span>),</span><br><span class="line">    <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">primaryKey</span>: <span class="literal">true</span>,</span><br><span class="line">    <span class="attr">unique</span>: <span class="literal">true</span>  <span class="comment">// 唯一约束</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="attr">createTime</span>: &#123;</span><br><span class="line">    <span class="attr">type</span>: <span class="title class_">DataTypes</span>.<span class="title function_">STRING</span>(<span class="number">20</span>),</span><br><span class="line">    <span class="attr">allowNull</span>: <span class="literal">false</span>,</span><br><span class="line">    <span class="attr">defaultValue</span>: <span class="title function_">dayjs</span>().<span class="title function_">format</span>(<span class="string">&quot;YYYY-MM-DD: HH:mm:ss&quot;</span>)</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="6-高级功能支持"><a href="#6-高级功能支持" class="headerlink" title="6. 高级功能支持"></a>6. 高级功能支持</h2><h3 id="事务处理"><a href="#事务处理" class="headerlink" title="事务处理"></a>事务处理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Sequelize 事务支持</span></span><br><span class="line"><span class="keyword">const</span> transaction = <span class="keyword">await</span> db.<span class="title function_">transaction</span>();</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">create</span>(&#123; </span><br><span class="line">    nickName, </span><br><span class="line">    avatar, </span><br><span class="line">    openid </span><br><span class="line">  &#125;, &#123; transaction &#125;);</span><br><span class="line">  </span><br><span class="line">  <span class="comment">// 其他相关操作</span></span><br><span class="line">  <span class="keyword">await</span> <span class="title class_">ChatHistory</span>.<span class="title function_">create</span>(&#123;</span><br><span class="line">    <span class="attr">userId</span>: user.<span class="property">openid</span>,</span><br><span class="line">    <span class="attr">sessionId</span>: <span class="title function_">generateSessionId</span>()</span><br><span class="line">  &#125;, &#123; transaction &#125;);</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">await</span> transaction.<span class="title function_">commit</span>();</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="keyword">await</span> transaction.<span class="title function_">rollback</span>();</span><br><span class="line">  <span class="keyword">throw</span> error;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="关联查询"><a href="#关联查询" class="headerlink" title="关联查询"></a>关联查询</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 定义关联关系</span></span><br><span class="line"><span class="title class_">User</span>.<span class="title function_">hasMany</span>(<span class="title class_">ChatHistory</span>, &#123; <span class="attr">foreignKey</span>: <span class="string">&#x27;userId&#x27;</span> &#125;);</span><br><span class="line"><span class="title class_">ChatHistory</span>.<span class="title function_">belongsTo</span>(<span class="title class_">User</span>, &#123; <span class="attr">foreignKey</span>: <span class="string">&#x27;userId&#x27;</span> &#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 关联查询</span></span><br><span class="line"><span class="keyword">const</span> userWithHistory = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">findOne</span>(&#123;</span><br><span class="line">  <span class="attr">where</span>: &#123; openid &#125;,</span><br><span class="line">  <span class="attr">include</span>: [&#123;</span><br><span class="line">    <span class="attr">model</span>: <span class="title class_">ChatHistory</span>,</span><br><span class="line">    <span class="attr">as</span>: <span class="string">&#x27;chatHistories&#x27;</span></span><br><span class="line">  &#125;]</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h2 id="7-性能优化"><a href="#7-性能优化" class="headerlink" title="7. 性能优化"></a>7. 性能优化</h2><h3 id="查询优化"><a href="#查询优化" class="headerlink" title="查询优化"></a>查询优化</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 分页查询</span></span><br><span class="line"><span class="keyword">const</span> users = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">findAndCountAll</span>(&#123;</span><br><span class="line">  <span class="attr">limit</span>: <span class="number">10</span>,</span><br><span class="line">  <span class="attr">offset</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="attr">order</span>: [[<span class="string">&#x27;createTime&#x27;</span>, <span class="string">&#x27;DESC&#x27;</span>]]</span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 字段选择</span></span><br><span class="line"><span class="keyword">const</span> userBasic = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">findOne</span>(&#123;</span><br><span class="line">  <span class="attr">where</span>: &#123; openid &#125;,</span><br><span class="line">  <span class="attr">attributes</span>: [<span class="string">&#x27;nickName&#x27;</span>, <span class="string">&#x27;avatar&#x27;</span>] <span class="comment">// 只查询需要的字段</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 批量操作</span></span><br><span class="line"><span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">bulkCreate</span>([</span><br><span class="line">  &#123; <span class="attr">nickName</span>: <span class="string">&#x27;user1&#x27;</span>, <span class="attr">avatar</span>: <span class="string">&#x27;avatar1&#x27;</span>, <span class="attr">openid</span>: <span class="string">&#x27;openid1&#x27;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">nickName</span>: <span class="string">&#x27;user2&#x27;</span>, <span class="attr">avatar</span>: <span class="string">&#x27;avatar2&#x27;</span>, <span class="attr">openid</span>: <span class="string">&#x27;openid2&#x27;</span> &#125;</span><br><span class="line">]);</span><br></pre></td></tr></table></figure>
+
+<h2 id="8-开发体验提升"><a href="#8-开发体验提升" class="headerlink" title="8. 开发体验提升"></a>8. 开发体验提升</h2><h3 id="IDE-支持"><a href="#IDE-支持" class="headerlink" title="IDE 支持"></a>IDE 支持</h3><ul>
+<li><strong>智能提示</strong>：完整的类型定义和代码补全</li>
+<li><strong>错误检查</strong>：编译时发现字段名错误</li>
+<li><strong>重构支持</strong>：字段重命名自动更新</li>
+</ul>
+<h3 id="调试友好"><a href="#调试友好" class="headerlink" title="调试友好"></a>调试友好</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 开启 SQL 日志（开发环境）</span></span><br><span class="line"><span class="keyword">const</span> db = <span class="keyword">new</span> <span class="title class_">Sequelize</span>(database, userName, password, &#123;</span><br><span class="line">  <span class="attr">logging</span>: <span class="variable language_">console</span>.<span class="property">log</span>, <span class="comment">// 输出 SQL 语句</span></span><br><span class="line">  <span class="comment">// ... 其他配置</span></span><br><span class="line">&#125;);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 查询结果</span></span><br><span class="line"><span class="keyword">const</span> user = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">findOne</span>(&#123; <span class="attr">where</span>: &#123; openid &#125; &#125;);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(user.<span class="title function_">toJSON</span>()); <span class="comment">// 转换为普通对象</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="9-小程序后端开发的最佳实践"><a href="#9-小程序后端开发的最佳实践" class="headerlink" title="9. 小程序后端开发的最佳实践"></a>9. 小程序后端开发的最佳实践</h2><h3 id="项目结构"><a href="#项目结构" class="headerlink" title="项目结构"></a>项目结构</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">├── config/</span><br><span class="line">│   ├── db.js          # 数据库配置</span><br><span class="line">│   └── default.js     # 环境配置</span><br><span class="line">├── model/</span><br><span class="line">│   └── user.js        # 数据模型</span><br><span class="line">├── controller/</span><br><span class="line">│   └── user.js        # 业务逻辑</span><br><span class="line">└── service/</span><br><span class="line">    └── user.js        # 服务层</span><br></pre></td></tr></table></figure>
+
+<h3 id="错误处理"><a href="#错误处理" class="headerlink" title="错误处理"></a>错误处理</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 统一的数据库错误处理</span></span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> user = <span class="keyword">await</span> <span class="title class_">User</span>.<span class="title function_">create</span>(userData);</span><br><span class="line">  <span class="keyword">return</span> user;</span><br><span class="line">&#125; <span class="keyword">catch</span> (error) &#123;</span><br><span class="line">  <span class="keyword">if</span> (error.<span class="property">name</span> === <span class="string">&#x27;SequelizeUniqueConstraintError&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;用户已存在&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">if</span> (error.<span class="property">name</span> === <span class="string">&#x27;SequelizeValidationError&#x27;</span>) &#123;</span><br><span class="line">    <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">&#x27;数据验证失败&#x27;</span>);</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">throw</span> error;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>Sequelize 在小程序后端开发中的核心优势：</p>
+<ol>
+<li><strong>开发效率</strong>：模型化定义，自动同步，减少样板代码</li>
+<li><strong>代码质量</strong>：类型安全，参数化查询，降低错误率</li>
+<li><strong>维护性</strong>：统一配置，清晰结构，便于团队协作</li>
+<li><strong>扩展性</strong>：支持事务、关联、迁移等高级功能</li>
+<li><strong>性能</strong>：查询优化，连接池管理，生产环境友好</li>
+</ol>
+<p>通过实际项目验证，Sequelize 显著提升了小程序后端开发的效率和代码质量，是现代 Node.js 后端开发的首选 ORM 工具。</p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <!-- 网站概览内容 -->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="TGG"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">TGG</p>
+  <div class="site-description" itemprop="description">一名立志成为全栈工程师的程序媛</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tgg426" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tgg426" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/t248210@163.com" title="E-Mail → t248210@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+      <!-- 侧边栏导航菜单 -->
+      <div class="sidebar-menu sidebar-panel motion-element">
+        <div class="sidebar-menu-title">
+          <i class="fa fa-bars fa-fw"></i>
+          导航菜单
+        </div>
+        <ul class="sidebar-menu-list">
+          <li class="sidebar-menu-item">
+            <a href="/" class="sidebar-menu-link">
+              <i class="fa fa-home fa-fw"></i>
+              <span>首页</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/about/" class="sidebar-menu-link">
+              <i class="fa fa-user fa-fw"></i>
+              <span>关于</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/tags/" class="sidebar-menu-link">
+              <i class="fa fa-tags fa-fw"></i>
+              <span>标签</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/categories/" class="sidebar-menu-link">
+              <i class="fa fa-th fa-fw"></i>
+              <span>分类</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/archives/" class="sidebar-menu-link">
+              <i class="fa fa-archive fa-fw"></i>
+              <span>归档</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 网易云音乐播放器 -->
+      <div class="netease-music-player sidebar-panel motion-element">
+        <div class="music-player-title">
+          <i class="fa fa-music fa-fw"></i>
+          音乐播放
+        </div>
+        <div class="netease-player-container">
+          <iframe 
+            frameborder="no" 
+            border="0" 
+            marginwidth="0" 
+            marginheight="0" 
+            width="320" 
+            height="86" 
+            src="//music.163.com/outchain/player?type=2&id=2099999600&auto=1&height=66">
+          </iframe>
+        </div>
+      </div>
+
+      <!--noindex-->
+      <div class="post-toc-toggle sidebar-panel motion-element">
+        <a class="btn-toc-toggle" href="javascript:void(0)">
+          <i class="fa fa-list"></i>
+          <span>目录</span>
+        </a>
+      </div>
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var tocBtn = document.querySelector('.btn-toc-toggle');
+        var tocWrap = document.querySelector('.post-toc-wrap');
+        if (tocBtn && tocWrap) {
+          tocBtn.addEventListener('click', function() {
+            tocWrap.classList.toggle('sidebar-panel-active');
+          });
+        }
+      });
+      </script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TGG</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='170' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/sidebar-nav.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>

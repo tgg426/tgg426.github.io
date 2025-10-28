@@ -1,0 +1,798 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 8.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
+
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"localhost","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
+
+  <meta name="description" content="WebSocket vs SSE：流式数据传输的技术选型引言在实时应用开发中，选择合适的通信协议至关重要。WebSocket 和 SSE（Server-Sent Events）是两种常用的流式数据传输技术，各自有不同的应用场景和优势。本文将深入分析这两种技术，并根据不同业务场景提供选型建议。  核心技术对比SSE (Server-Sent Events)核心特征：  📡 单向通信：服务端 → 客">
+<meta property="og:type" content="article">
+<meta property="og:title" content="websocket协议">
+<meta property="og:url" content="http://localhost:4000/2024/10/28/websocket%E5%8D%8F%E8%AE%AE/index.html">
+<meta property="og:site_name" content="TGG的博客">
+<meta property="og:description" content="WebSocket vs SSE：流式数据传输的技术选型引言在实时应用开发中，选择合适的通信协议至关重要。WebSocket 和 SSE（Server-Sent Events）是两种常用的流式数据传输技术，各自有不同的应用场景和优势。本文将深入分析这两种技术，并根据不同业务场景提供选型建议。  核心技术对比SSE (Server-Sent Events)核心特征：  📡 单向通信：服务端 → 客">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-10-28T05:59:38.000Z">
+<meta property="article:modified_time" content="2025-10-28T07:18:29.978Z">
+<meta property="article:author" content="TGG">
+<meta property="article:tag" content="浏览器协议">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://localhost:4000/2024/10/28/websocket%E5%8D%8F%E8%AE%AE/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'zh-CN'
+  };
+</script>
+
+  <title>websocket协议 | TGG的博客</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">TGG的博客</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+      <p class="site-subtitle" itemprop="description">Welcome && Congratulations</p>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="home fa-fw"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="user fa-fw"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="tags fa-fw"></i>标签<span class="badge">4</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="th fa-fw"></i>分类<span class="badge">6</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="archive fa-fw"></i>归档<span class="badge">6</span></a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+  <a href="https://github.com/tgg426" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="noopener" target="_blank"><svg width="80" height="80" viewBox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://localhost:4000/2024/10/28/websocket%E5%8D%8F%E8%AE%AE/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/3.jpg">
+      <meta itemprop="name" content="TGG">
+      <meta itemprop="description" content="一名立志成为全栈工程师的程序媛">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="TGG的博客">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          websocket协议
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2024-10-28 13:59:38" itemprop="dateCreated datePublished" datetime="2024-10-28T13:59:38+08:00">2024-10-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2025-10-28 15:18:29" itemprop="dateModified" datetime="2025-10-28T15:18:29+08:00">2025-10-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-folder"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8D%8F%E8%AE%AE/" itemprop="url" rel="index"><span itemprop="name">浏览器协议</span></a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h1 id="WebSocket-vs-SSE：流式数据传输的技术选型"><a href="#WebSocket-vs-SSE：流式数据传输的技术选型" class="headerlink" title="WebSocket vs SSE：流式数据传输的技术选型"></a>WebSocket vs SSE：流式数据传输的技术选型</h1><h2 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h2><p>在实时应用开发中，选择合适的通信协议至关重要。WebSocket 和 SSE（Server-Sent Events）是两种常用的流式数据传输技术，各自有不同的应用场景和优势。本文将深入分析这两种技术，并根据不同业务场景提供选型建议。</p>
+<hr>
+<h2 id="核心技术对比"><a href="#核心技术对比" class="headerlink" title="核心技术对比"></a>核心技术对比</h2><h3 id="SSE-Server-Sent-Events"><a href="#SSE-Server-Sent-Events" class="headerlink" title="SSE (Server-Sent Events)"></a>SSE (Server-Sent Events)</h3><p><strong>核心特征：</strong></p>
+<ul>
+<li>📡 单向通信：服务端 → 客户端</li>
+<li>🔗 基于 HTTP 长连接</li>
+<li>🔄 自动重连机制</li>
+<li>📝 仅支持文本数据</li>
+<li>🚀 实现简单</li>
+</ul>
+<p><strong>工作机制：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="keyword">const</span> eventSource = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">&#x27;/stream&#x27;</span>)</span><br><span class="line"></span><br><span class="line">eventSource.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>))</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务端响应格式（SSE）</span></span><br><span class="line"><span class="comment">// data: &#123;&quot;message&quot;: &quot;Hello&quot;&#125;</span></span><br><span class="line"><span class="comment">// </span></span><br><span class="line"><span class="comment">// data: &#123;&quot;message&quot;: &quot;World&quot;&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="WebSocket"><a href="#WebSocket" class="headerlink" title="WebSocket"></a>WebSocket</h3><p><strong>核心特征：</strong></p>
+<ul>
+<li>📱 双向通信：服务端 ⇄ 客户端</li>
+<li>🔌 独立协议（ws:&#x2F;&#x2F;, wss:&#x2F;&#x2F;）</li>
+<li>⚙️ 需手动实现重连</li>
+<li>📦 支持文本和二进制数据</li>
+<li>🎯 低延迟、高性能</li>
+</ul>
+<p><strong>工作机制：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line"><span class="keyword">const</span> ws = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&#x27;ws://example.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line">ws.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">log</span>(event.<span class="property">data</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">ws.<span class="title function_">send</span>(<span class="string">&#x27;发送消息到服务器&#x27;</span>)</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="功能特性对比表"><a href="#功能特性对比表" class="headerlink" title="功能特性对比表"></a>功能特性对比表</h2><table>
+<thead>
+<tr>
+<th>特性</th>
+<th>SSE</th>
+<th>WebSocket</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>通信方向</strong></td>
+<td>单向（服务端→客户端）</td>
+<td>双向（全双工）</td>
+<td>SSE 适合推送场景</td>
+</tr>
+<tr>
+<td><strong>协议基础</strong></td>
+<td>HTTP&#x2F;1.1</td>
+<td>独立协议</td>
+<td>SSE 更轻量</td>
+</tr>
+<tr>
+<td><strong>数据格式</strong></td>
+<td>仅文本（UTF-8）</td>
+<td>文本 + 二进制</td>
+<td>WebSocket 功能更全</td>
+</tr>
+<tr>
+<td><strong>自动重连</strong></td>
+<td>✅ 浏览器原生支持</td>
+<td>❌ 需手动实现</td>
+<td>SSE 更省事</td>
+</tr>
+<tr>
+<td><strong>实现复杂度</strong></td>
+<td>⭐ 简单</td>
+<td>⭐⭐ 中等</td>
+<td>SSE 开发更快</td>
+</tr>
+<tr>
+<td><strong>浏览器兼容</strong></td>
+<td>现代浏览器</td>
+<td>兼容性极好</td>
+<td>WebSocket 历史更久</td>
+</tr>
+<tr>
+<td><strong>服务器开销</strong></td>
+<td>较低</td>
+<td>较高（需心跳维持）</td>
+<td>SSE 资源占用少</td>
+</tr>
+<tr>
+<td><strong>代理友好</strong></td>
+<td>✅ 完全兼容 HTTP 代理</td>
+<td>⚠️ 需要特殊配置</td>
+<td>SSE 部署更简单</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="技术选型分析"><a href="#技术选型分析" class="headerlink" title="技术选型分析"></a>技术选型分析</h2><h3 id="场景一：AI-对话流式输出-✅-SSE"><a href="#场景一：AI-对话流式输出-✅-SSE" class="headerlink" title="场景一：AI 对话流式输出 ✅ SSE"></a>场景一：AI 对话流式输出 ✅ SSE</h3><p><strong>典型应用：</strong> ChatGPT、Claude 等 AI 对话应用</p>
+<p><strong>为什么选择 SSE：</strong></p>
+<ul>
+<li>单向数据流：AI → 用户</li>
+<li>自动重连确保用户体验</li>
+<li>HTTP 协议穿透性强</li>
+<li>实现简单，维护成本低</li>
+</ul>
+<p><strong>项目实现示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// api/request.js - 微信小程序 SSE 实现</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">request</span> = (<span class="params">url, method, data = &#123;&#125;, enableChunked = <span class="literal">false</span></span>) =&gt; &#123;</span><br><span class="line">    <span class="keyword">const</span> requestTask = wx.<span class="title function_">request</span>(&#123;</span><br><span class="line">        <span class="attr">url</span>: requestUrl + url,</span><br><span class="line">        method,</span><br><span class="line">        data,</span><br><span class="line">        <span class="attr">enableChunked</span>: <span class="literal">true</span>,  <span class="comment">// 启用分块传输</span></span><br><span class="line">        <span class="attr">header</span>: &#123; <span class="title class_">Authorization</span>: <span class="title function_">getToken</span>() &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 接收流式数据</span></span><br><span class="line">    requestTask.<span class="title function_">onChunkReceived</span>(<span class="function"><span class="params">response</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">let</span> arrayBuffer = response.<span class="property">data</span></span><br><span class="line">        <span class="keyword">const</span> arrayBufferss = <span class="keyword">new</span> <span class="title class_">Uint8Array</span>(arrayBuffer)</span><br><span class="line">        <span class="keyword">let</span> string = <span class="string">&#x27;&#x27;</span></span><br><span class="line">        </span><br><span class="line">        <span class="comment">// ArrayBuffer 转字符串</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">let</span> i = <span class="number">0</span>; i &lt; arrayBufferss.<span class="property">length</span>; i++)&#123;</span><br><span class="line">            string += <span class="title class_">String</span>.<span class="title function_">fromCharCode</span>(arrayBufferss[i])</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 解码并累积到 buffer</span></span><br><span class="line">        buffer += <span class="built_in">decodeURIComponent</span>(<span class="built_in">escape</span>(string))</span><br><span class="line">        </span><br><span class="line">        <span class="comment">// 按换行符分割 SSE 事件</span></span><br><span class="line">        <span class="keyword">while</span>(buffer.<span class="title function_">includes</span>(<span class="string">&#x27;\n&#x27;</span>))&#123;</span><br><span class="line">            <span class="keyword">const</span> index = buffer.<span class="title function_">indexOf</span>(<span class="string">&#x27;\n&#x27;</span>)</span><br><span class="line">            <span class="keyword">const</span> chunk = buffer.<span class="title function_">slice</span>(<span class="number">0</span>, index)</span><br><span class="line">            buffer = buffer.<span class="title function_">slice</span>(index + <span class="number">1</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="comment">// 解析 data: 开头的 JSON 数据</span></span><br><span class="line">            <span class="keyword">if</span>(chunk.<span class="title function_">startsWith</span>(<span class="string">&#x27;data: &#x27;</span>) &amp;&amp; !chunk.<span class="title function_">includes</span>(<span class="string">&#x27;[DONE]&#x27;</span>))&#123;</span><br><span class="line">                <span class="keyword">const</span> jsonData = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(chunk.<span class="title function_">replace</span>(<span class="string">&#x27;data: &#x27;</span>, <span class="string">&#x27;&#x27;</span>))</span><br><span class="line">                <span class="title function_">chatbotMessage</span>().<span class="title function_">handleText</span>(jsonData)  <span class="comment">// 处理流式数据</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>数据流处理：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// store/index.js - 状态管理</span></span><br><span class="line"><span class="keyword">async</span> <span class="title function_">handleText</span>(<span class="params">objVal</span>)&#123;</span><br><span class="line">    <span class="keyword">let</span> aiMessages = <span class="variable language_">this</span>.<span class="property">messages</span>[<span class="variable language_">this</span>.<span class="property">messages</span>.<span class="property">length</span> - <span class="number">1</span>]</span><br><span class="line">    aiMessages.<span class="property">finish_reason</span> = <span class="string">&#x27;respond&#x27;</span>  <span class="comment">// 状态：响应中</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 累积文本内容</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">receiveText</span> += objVal.<span class="property">choices</span>[<span class="number">0</span>].<span class="property">delta</span>.<span class="property">content</span> || <span class="string">&#x27;&#x27;</span></span><br><span class="line">    aiMessages.<span class="property">content</span> = <span class="variable language_">this</span>.<span class="property">receiveText</span></span><br><span class="line">    </span><br><span class="line">    <span class="comment">// 判断是否结束</span></span><br><span class="line">    <span class="keyword">if</span>(objVal.<span class="property">choices</span>[<span class="number">0</span>].<span class="property">finish_reason</span>)&#123;</span><br><span class="line">        aiMessages.<span class="property">finish_reason</span> = objVal.<span class="property">choices</span>[<span class="number">0</span>].<span class="property">finish_reason</span></span><br><span class="line">        <span class="comment">// 处理完成逻辑</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p><strong>优势总结：</strong></p>
+<ul>
+<li>✅ 微信小程序原生支持</li>
+<li>✅ 自动断线重连</li>
+<li>✅ HTTP 基础设施支持</li>
+<li>✅ 代码简洁，易于维护</li>
+</ul>
+<hr>
+<h3 id="场景二：实时聊天应用-✅-WebSocket"><a href="#场景二：实时聊天应用-✅-WebSocket" class="headerlink" title="场景二：实时聊天应用 ✅ WebSocket"></a>场景二：实时聊天应用 ✅ WebSocket</h3><p><strong>典型应用：</strong> 微信群聊、Slack、Discord</p>
+<p><strong>为什么选择 WebSocket：</strong></p>
+<ul>
+<li>需要双向通信</li>
+<li>低延迟要求</li>
+<li>支持二进制数据传输（图片、文件等）</li>
+<li>心跳机制保证连接稳定性</li>
+</ul>
+<p><strong>实现示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">ChatWebSocket</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">url</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">url</span> = url</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span> = <span class="literal">null</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">reconnectInterval</span> = <span class="number">5000</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">heartbeatInterval</span> = <span class="number">30000</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">heartbeatTimer</span> = <span class="literal">null</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">connect</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span> = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="variable language_">this</span>.<span class="property">url</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onopen</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;连接成功&#x27;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">startHeartbeat</span>()</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onmessage</span> = <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> data = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(e.<span class="property">data</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">handleMessage</span>(data)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onclose</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;连接关闭&#x27;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">stopHeartbeat</span>()</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">reconnect</span>()</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onerror</span> = <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;WebSocket 错误:&#x27;</span>, error)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">send</span>(<span class="params">message</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">readyState</span> === <span class="title class_">WebSocket</span>.<span class="property">OPEN</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(message))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">reconnect</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="built_in">setTimeout</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;尝试重连...&#x27;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">connect</span>()</span><br><span class="line">        &#125;, <span class="variable language_">this</span>.<span class="property">reconnectInterval</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">startHeartbeat</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">heartbeatTimer</span> = <span class="built_in">setInterval</span>(<span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">send</span>(&#123; <span class="attr">type</span>: <span class="string">&#x27;ping&#x27;</span> &#125;)</span><br><span class="line">        &#125;, <span class="variable language_">this</span>.<span class="property">heartbeatInterval</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">stopHeartbeat</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">heartbeatTimer</span>) &#123;</span><br><span class="line">            <span class="built_in">clearInterval</span>(<span class="variable language_">this</span>.<span class="property">heartbeatTimer</span>)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">close</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="title function_">stopHeartbeat</span>()</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="title function_">close</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line"><span class="keyword">const</span> chat = <span class="keyword">new</span> <span class="title class_">ChatWebSocket</span>(<span class="string">&#x27;wss://chat.example.com&#x27;</span>)</span><br><span class="line">chat.<span class="title function_">on</span>(<span class="string">&#x27;message&#x27;</span>, <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="comment">// 处理消息</span></span><br><span class="line">&#125;)</span><br><span class="line">chat.<span class="title function_">send</span>(&#123; <span class="attr">type</span>: <span class="string">&#x27;text&#x27;</span>, <span class="attr">content</span>: <span class="string">&#x27;Hello&#x27;</span> &#125;)</span><br></pre></td></tr></table></figure>
+
+<p><strong>优势总结：</strong></p>
+<ul>
+<li>✅ 双向实时通信</li>
+<li>✅ 支持复杂交互</li>
+<li>✅ 低延迟、高性能</li>
+<li>✅ 二进制数据传输</li>
+</ul>
+<hr>
+<h3 id="场景三：实时监控大屏-✅-SSE"><a href="#场景三：实时监控大屏-✅-SSE" class="headerlink" title="场景三：实时监控大屏 ✅ SSE"></a>场景三：实时监控大屏 ✅ SSE</h3><p><strong>典型应用：</strong> 服务器监控、数据大屏、日志系统</p>
+<p><strong>为什么选择 SSE：</strong></p>
+<ul>
+<li>单向数据推送</li>
+<li>自动重连保证数据完整性</li>
+<li>实现简单，运维成本低</li>
+<li>HTTP 基础设施支持</li>
+</ul>
+<p><strong>实现示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 监控系统</span></span><br><span class="line"><span class="keyword">class</span> <span class="title class_">MonitorSSE</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">url, callbacks</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">url</span> = url</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span> = <span class="literal">null</span></span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">callbacks</span> = callbacks</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">connect</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span> = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="variable language_">this</span>.<span class="property">url</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span>.<span class="property">onopen</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;监控连接已建立&#x27;</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="property">onOpen</span>?.()</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span>.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> data = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="property">onMessage</span>?.(data)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span>.<span class="property">onerror</span> = <span class="function">(<span class="params">error</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&#x27;监控连接错误:&#x27;</span>, error)</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">callbacks</span>.<span class="property">onError</span>?.(error)</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">close</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span>?.<span class="title function_">close</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用示例</span></span><br><span class="line"><span class="keyword">const</span> monitor = <span class="keyword">new</span> <span class="title class_">MonitorSSE</span>(<span class="string">&#x27;/monitor/stream&#x27;</span>, &#123;</span><br><span class="line">    <span class="attr">onMessage</span>: <span class="function">(<span class="params">data</span>) =&gt;</span> &#123;</span><br><span class="line">        <span class="title function_">updateDashboard</span>(data)  <span class="comment">// 更新监控面板</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">monitor.<span class="title function_">connect</span>()</span><br></pre></td></tr></table></figure>
+
+<p><strong>优势总结：</strong></p>
+<ul>
+<li>✅ 自动重连机制</li>
+<li>✅ 资源占用低</li>
+<li>✅ 部署简单</li>
+<li>✅ 监控数据完整性</li>
+</ul>
+<hr>
+<h3 id="场景四：协同编辑-✅-WebSocket"><a href="#场景四：协同编辑-✅-WebSocket" class="headerlink" title="场景四：协同编辑 ✅ WebSocket"></a>场景四：协同编辑 ✅ WebSocket</h3><p><strong>典型应用：</strong> Google Docs、Notion、腾讯文档</p>
+<p><strong>为什么选择 WebSocket：</strong></p>
+<ul>
+<li>多端实时同步</li>
+<li>低延迟操作反馈</li>
+<li>冲突检测和解决</li>
+<li>支持复杂状态管理</li>
+</ul>
+<p><strong>实现示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">CollaborativeEditor</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">docId</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">docId</span> = docId</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span> = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">`ws://example.com/docs/<span class="subst">$&#123;docId&#125;</span>`</span>)</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">operations</span> = []</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">socketReady</span> = <span class="literal">false</span></span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">connect</span>(<span class="params"></span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onopen</span> = <span class="function">() =&gt;</span> &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">socketReady</span> = <span class="literal">true</span></span><br><span class="line">            <span class="variable language_">this</span>.<span class="title function_">send</span>(&#123; <span class="attr">type</span>: <span class="string">&#x27;join&#x27;</span>, <span class="attr">docId</span>: <span class="variable language_">this</span>.<span class="property">docId</span> &#125;)</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> &#123; type, data &#125; = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>)</span><br><span class="line">            </span><br><span class="line">            <span class="keyword">switch</span>(type) &#123;</span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;operation&#x27;</span>:</span><br><span class="line">                    <span class="variable language_">this</span>.<span class="title function_">applyOperation</span>(data)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;cursor&#x27;</span>:</span><br><span class="line">                    <span class="variable language_">this</span>.<span class="title function_">updateCursor</span>(data)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">                <span class="keyword">case</span> <span class="string">&#x27;user_joined&#x27;</span>:</span><br><span class="line">                    <span class="variable language_">this</span>.<span class="title function_">userJoined</span>(data)</span><br><span class="line">                    <span class="keyword">break</span></span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">sendOperation</span>(<span class="params">operation</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="variable language_">this</span>.<span class="property">socketReady</span>) &#123;</span><br><span class="line">            <span class="variable language_">this</span>.<span class="property">ws</span>.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123;</span><br><span class="line">                <span class="attr">type</span>: <span class="string">&#x27;operation&#x27;</span>,</span><br><span class="line">                <span class="attr">data</span>: operation</span><br><span class="line">            &#125;))</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">applyOperation</span>(<span class="params">operation</span>) &#123;</span><br><span class="line">        <span class="comment">// 应用其他用户的编辑操作</span></span><br><span class="line">        <span class="title function_">transformOperation</span>(operation, <span class="variable language_">this</span>.<span class="property">operations</span>)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="场景五：股票行情推送-✅-SSE"><a href="#场景五：股票行情推送-✅-SSE" class="headerlink" title="场景五：股票行情推送 ✅ SSE"></a>场景五：股票行情推送 ✅ SSE</h3><p><strong>典型应用：</strong> 实时行情、体育比分、加密货币价格</p>
+<p><strong>为什么选择 SSE：</strong></p>
+<ul>
+<li>海量实时推送数据</li>
+<li>高并发连接</li>
+<li>自动重连保证数据连续性</li>
+<li>简单可靠的实现</li>
+</ul>
+<p><strong>实现示例：</strong></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">StockTicker</span> &#123;</span><br><span class="line">    <span class="title function_">constructor</span>(<span class="params">symbols</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">symbols</span> = symbols</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span> = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">`/stocks?symbols=<span class="subst">$&#123;symbols.join(<span class="string">&#x27;,&#x27;</span>)&#125;</span>`</span>)</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="title function_">subscribe</span>(<span class="params">callback</span>) &#123;</span><br><span class="line">        <span class="variable language_">this</span>.<span class="property">eventSource</span>.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">            <span class="keyword">const</span> data = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>)</span><br><span class="line">            <span class="title function_">callback</span>(data)  <span class="comment">// 更新价格</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="实际项目中的混合使用"><a href="#实际项目中的混合使用" class="headerlink" title="实际项目中的混合使用"></a>实际项目中的混合使用</h2><p>很多现代应用会同时使用两种技术：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 使用 SSE 处理服务器推送</span></span><br><span class="line"><span class="keyword">const</span> notifications = <span class="keyword">new</span> <span class="title class_">EventSource</span>(<span class="string">&#x27;/api/notifications&#x27;</span>)</span><br><span class="line"></span><br><span class="line">notifications.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> notification = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>)</span><br><span class="line">    <span class="title function_">displayNotification</span>(notification)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 使用 WebSocket 处理交互</span></span><br><span class="line"><span class="keyword">const</span> chatSocket = <span class="keyword">new</span> <span class="title class_">WebSocket</span>(<span class="string">&#x27;ws://chat.example.com&#x27;</span>)</span><br><span class="line"></span><br><span class="line">chatSocket.<span class="property">onmessage</span> = <span class="function">(<span class="params">event</span>) =&gt;</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> message = <span class="title class_">JSON</span>.<span class="title function_">parse</span>(event.<span class="property">data</span>)</span><br><span class="line">    <span class="title function_">appendMessage</span>(message)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">chatSocket.<span class="title function_">send</span>(<span class="title class_">JSON</span>.<span class="title function_">stringify</span>(&#123; </span><br><span class="line">    <span class="attr">type</span>: <span class="string">&#x27;message&#x27;</span>, </span><br><span class="line">    <span class="attr">text</span>: userInput </span><br><span class="line">&#125;))</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="决策流程图"><a href="#决策流程图" class="headerlink" title="决策流程图"></a>决策流程图</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">开始选择</span><br><span class="line">    │</span><br><span class="line">    ├── 需要客户端主动发送数据？</span><br><span class="line">    │   │</span><br><span class="line">    │   ├── 否 → [SSE]</span><br><span class="line">    │   │   │</span><br><span class="line">    │   │   └── 特征：</span><br><span class="line">    │   │       ✅ 简单实现</span><br><span class="line">    │   │       ✅ 自动重连</span><br><span class="line">    │   │       ✅ 代理友好</span><br><span class="line">    │   │</span><br><span class="line">    │   └── 是 → 需要二进制数据？</span><br><span class="line">    │       │</span><br><span class="line">    │       ├── 否 → 考虑 [SSE]（简单场景）</span><br><span class="line">    │       │</span><br><span class="line">    │       └── 是 → [WebSocket]</span><br><span class="line">    │           │</span><br><span class="line">    │           └── 特征：</span><br><span class="line">    │               ✅ 双向通信</span><br><span class="line">    │               ✅ 低延迟</span><br><span class="line">    │               ✅ 功能完整</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h2 id="使用场景决策表"><a href="#使用场景决策表" class="headerlink" title="使用场景决策表"></a>使用场景决策表</h2><table>
+<thead>
+<tr>
+<th>应用场景</th>
+<th>推荐技术</th>
+<th>关键因素</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>AI 对话&#x2F;文本生成</strong></td>
+<td>SSE</td>
+<td>单向流式推送，简单可靠</td>
+</tr>
+<tr>
+<td><strong>实时聊天</strong></td>
+<td>WebSocket</td>
+<td>双向交互，即时响应</td>
+</tr>
+<tr>
+<td><strong>实时监控</strong></td>
+<td>SSE</td>
+<td>单向数据推送，成本低</td>
+</tr>
+<tr>
+<td><strong>在线游戏</strong></td>
+<td>WebSocket</td>
+<td>双向、低延迟、二进制</td>
+</tr>
+<tr>
+<td><strong>文件传输</strong></td>
+<td>WebSocket</td>
+<td>二进制支持</td>
+</tr>
+<tr>
+<td><strong>通知推送</strong></td>
+<td>SSE</td>
+<td>简单实现，自动重连</td>
+</tr>
+<tr>
+<td><strong>协同编辑</strong></td>
+<td>WebSocket</td>
+<td>实时同步、冲突解决</td>
+</tr>
+<tr>
+<td><strong>股票行情</strong></td>
+<td>SSE</td>
+<td>高频推送，自动重连</td>
+</tr>
+<tr>
+<td><strong>直播弹幕</strong></td>
+<td>WebSocket</td>
+<td>双向、实时交互</td>
+</tr>
+<tr>
+<td><strong>IoT 设备控制</strong></td>
+<td>WebSocket</td>
+<td>双向控制，实时响应</td>
+</tr>
+</tbody></table>
+<hr>
+<h2 id="性能对比"><a href="#性能对比" class="headerlink" title="性能对比"></a>性能对比</h2><h3 id="SSE-性能特点"><a href="#SSE-性能特点" class="headerlink" title="SSE 性能特点"></a>SSE 性能特点</h3><ul>
+<li><strong>连接数：</strong> 可支持数万并发连接</li>
+<li><strong>延迟：</strong> 略高于 WebSocket（HTTP 开销）</li>
+<li><strong>资源占用：</strong> 低，单连接占用少</li>
+<li><strong>适用：</strong> 高并发推送场景</li>
+</ul>
+<h3 id="WebSocket-性能特点"><a href="#WebSocket-性能特点" class="headerlink" title="WebSocket 性能特点"></a>WebSocket 性能特点</h3><ul>
+<li><strong>连接数：</strong> 受限于服务器资源（通常几千）</li>
+<li><strong>延迟：</strong> 极低，适合实时交互</li>
+<li><strong>资源占用：</strong> 较高（需心跳保活）</li>
+<li><strong>适用：</strong> 低延迟、双向通信场景</li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="选择-SSE-的场景"><a href="#选择-SSE-的场景" class="headerlink" title="选择 SSE 的场景"></a>选择 SSE 的场景</h3><ol>
+<li>✅ 单向数据推送（AI 对话、监控、通知）</li>
+<li>✅ 需要简单可靠的实现</li>
+<li>✅ 需要自动重连机制</li>
+<li>✅ 需要穿透各种代理和防火墙</li>
+<li>✅ 数据量大的高频推送</li>
+</ol>
+<h3 id="选择-WebSocket-的场景"><a href="#选择-WebSocket-的场景" class="headerlink" title="选择 WebSocket 的场景"></a>选择 WebSocket 的场景</h3><ol>
+<li>✅ 需要双向实时通信</li>
+<li>✅ 需要发送二进制数据</li>
+<li>✅ 需要极低延迟</li>
+<li>✅ 需要复杂的交互逻辑</li>
+<li>✅ 需要全双工通信</li>
+</ol>
+<h3 id="最佳实践建议"><a href="#最佳实践建议" class="headerlink" title="最佳实践建议"></a>最佳实践建议</h3><ol>
+<li><strong>单一职责原则</strong>：根据功能选择合适技术</li>
+<li><strong>混合使用</strong>：同一应用可同时使用两种技术</li>
+<li><strong>渐进增强</strong>：从简单场景开始，逐步优化</li>
+<li><strong>错误处理</strong>：完善的异常处理和重连机制</li>
+<li><strong>性能监控</strong>：实时监控连接状态和数据流</li>
+</ol>
+<hr>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><ul>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events">MDN: Server-Sent Events</a></li>
+<li><a target="_blank" rel="noopener" href="https://developer.mozilla.org/en-US/docs/Web/API/WebSocket">MDN: WebSocket API</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/network/request/wx.request.html">微信小程序：enableChunked 分块传输</a></li>
+<li><a target="_blank" rel="noopener" href="https://developers.weixin.qq.com/miniprogram/dev/api/network/download/wx.RequestTask.onChunkReceived.html">微信小程序：onChunkReceived 监听数据包接收</a></li>
+</ul>
+<hr>
+
+    </div>
+
+    
+    
+    
+        <div class="reward-container">
+  <div></div>
+  <button onclick="var qr = document.getElementById('qr'); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.png" alt="TGG 微信支付">
+        <p>微信支付</p>
+      </div>
+
+  </div>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%B5%8F%E8%A7%88%E5%99%A8%E5%8D%8F%E8%AE%AE/" rel="tag"># 浏览器协议</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2024/10/28/%E6%96%87%E7%94%9F%E5%9B%BE/" rel="prev" title="大模型应用--文生图">
+      <i class="fa fa-chevron-left"></i> 大模型应用--文生图
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2024/12/20/%E5%A4%A7%E6%A8%A1%E5%9E%8B%E5%BA%94%E7%94%A8/" rel="next" title="大模型应用--文生文">
+      大模型应用--文生文 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+
+
+          </div>
+          
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <!-- 网站概览内容 -->
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="TGG"
+      src="/images/3.jpg">
+  <p class="site-author-name" itemprop="name">TGG</p>
+  <div class="site-description" itemprop="description">一名立志成为全栈工程师的程序媛</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">6</span>
+          <span class="site-state-item-name">文章</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">4</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/tgg426" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;tgg426" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/t248210@163.com" title="E-Mail → t248210@163.com"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+      <!-- 侧边栏导航菜单 -->
+      <div class="sidebar-menu sidebar-panel motion-element">
+        <div class="sidebar-menu-title">
+          <i class="fa fa-bars fa-fw"></i>
+          导航菜单
+        </div>
+        <ul class="sidebar-menu-list">
+          <li class="sidebar-menu-item">
+            <a href="/" class="sidebar-menu-link">
+              <i class="fa fa-home fa-fw"></i>
+              <span>首页</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/about/" class="sidebar-menu-link">
+              <i class="fa fa-user fa-fw"></i>
+              <span>关于</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/tags/" class="sidebar-menu-link">
+              <i class="fa fa-tags fa-fw"></i>
+              <span>标签</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/categories/" class="sidebar-menu-link">
+              <i class="fa fa-th fa-fw"></i>
+              <span>分类</span>
+            </a>
+          </li>
+          <li class="sidebar-menu-item">
+            <a href="/archives/" class="sidebar-menu-link">
+              <i class="fa fa-archive fa-fw"></i>
+              <span>归档</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- 网易云音乐播放器 -->
+      <div class="netease-music-player sidebar-panel motion-element">
+        <div class="music-player-title">
+          <i class="fa fa-music fa-fw"></i>
+          音乐播放
+        </div>
+        <div class="netease-player-container">
+          <iframe 
+            frameborder="no" 
+            border="0" 
+            marginwidth="0" 
+            marginheight="0" 
+            width="320" 
+            height="86" 
+            src="//music.163.com/outchain/player?type=2&id=2099999600&auto=1&height=66">
+          </iframe>
+        </div>
+      </div>
+
+      <!--noindex-->
+      <div class="post-toc-toggle sidebar-panel motion-element">
+        <a class="btn-toc-toggle" href="javascript:void(0)">
+          <i class="fa fa-list"></i>
+          <span>目录</span>
+        </a>
+      </div>
+      <div class="post-toc-wrap sidebar-panel sidebar-panel-active">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#WebSocket-vs-SSE%EF%BC%9A%E6%B5%81%E5%BC%8F%E6%95%B0%E6%8D%AE%E4%BC%A0%E8%BE%93%E7%9A%84%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B"><span class="nav-number">1.</span> <span class="nav-text">WebSocket vs SSE：流式数据传输的技术选型</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%BC%95%E8%A8%80"><span class="nav-number">1.1.</span> <span class="nav-text">引言</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%E5%AF%B9%E6%AF%94"><span class="nav-number">1.2.</span> <span class="nav-text">核心技术对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSE-Server-Sent-Events"><span class="nav-number">1.2.1.</span> <span class="nav-text">SSE (Server-Sent Events)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket"><span class="nav-number">1.2.2.</span> <span class="nav-text">WebSocket</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8A%9F%E8%83%BD%E7%89%B9%E6%80%A7%E5%AF%B9%E6%AF%94%E8%A1%A8"><span class="nav-number">1.3.</span> <span class="nav-text">功能特性对比表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%8A%80%E6%9C%AF%E9%80%89%E5%9E%8B%E5%88%86%E6%9E%90"><span class="nav-number">1.4.</span> <span class="nav-text">技术选型分析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%80%EF%BC%9AAI-%E5%AF%B9%E8%AF%9D%E6%B5%81%E5%BC%8F%E8%BE%93%E5%87%BA-%E2%9C%85-SSE"><span class="nav-number">1.4.1.</span> <span class="nav-text">场景一：AI 对话流式输出 ✅ SSE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%BA%8C%EF%BC%9A%E5%AE%9E%E6%97%B6%E8%81%8A%E5%A4%A9%E5%BA%94%E7%94%A8-%E2%9C%85-WebSocket"><span class="nav-number">1.4.2.</span> <span class="nav-text">场景二：实时聊天应用 ✅ WebSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%B8%89%EF%BC%9A%E5%AE%9E%E6%97%B6%E7%9B%91%E6%8E%A7%E5%A4%A7%E5%B1%8F-%E2%9C%85-SSE"><span class="nav-number">1.4.3.</span> <span class="nav-text">场景三：实时监控大屏 ✅ SSE</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E5%9B%9B%EF%BC%9A%E5%8D%8F%E5%90%8C%E7%BC%96%E8%BE%91-%E2%9C%85-WebSocket"><span class="nav-number">1.4.4.</span> <span class="nav-text">场景四：协同编辑 ✅ WebSocket</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%BA%E6%99%AF%E4%BA%94%EF%BC%9A%E8%82%A1%E7%A5%A8%E8%A1%8C%E6%83%85%E6%8E%A8%E9%80%81-%E2%9C%85-SSE"><span class="nav-number">1.4.5.</span> <span class="nav-text">场景五：股票行情推送 ✅ SSE</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%AE%9E%E9%99%85%E9%A1%B9%E7%9B%AE%E4%B8%AD%E7%9A%84%E6%B7%B7%E5%90%88%E4%BD%BF%E7%94%A8"><span class="nav-number">1.5.</span> <span class="nav-text">实际项目中的混合使用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%86%B3%E7%AD%96%E6%B5%81%E7%A8%8B%E5%9B%BE"><span class="nav-number">1.6.</span> <span class="nav-text">决策流程图</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF%E5%86%B3%E7%AD%96%E8%A1%A8"><span class="nav-number">1.7.</span> <span class="nav-text">使用场景决策表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%A7%E8%83%BD%E5%AF%B9%E6%AF%94"><span class="nav-number">1.8.</span> <span class="nav-text">性能对比</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SSE-%E6%80%A7%E8%83%BD%E7%89%B9%E7%82%B9"><span class="nav-number">1.8.1.</span> <span class="nav-text">SSE 性能特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WebSocket-%E6%80%A7%E8%83%BD%E7%89%B9%E7%82%B9"><span class="nav-number">1.8.2.</span> <span class="nav-text">WebSocket 性能特点</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">1.9.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9-SSE-%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">1.9.1.</span> <span class="nav-text">选择 SSE 的场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%80%89%E6%8B%A9-WebSocket-%E7%9A%84%E5%9C%BA%E6%99%AF"><span class="nav-number">1.9.2.</span> <span class="nav-text">选择 WebSocket 的场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5%E5%BB%BA%E8%AE%AE"><span class="nav-number">1.9.3.</span> <span class="nav-text">最佳实践建议</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99"><span class="nav-number">1.10.</span> <span class="nav-text">参考资料</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var tocBtn = document.querySelector('.btn-toc-toggle');
+        var tocWrap = document.querySelector('.post-toc-wrap');
+        if (tocBtn && tocWrap) {
+          tocBtn.addEventListener('click', function() {
+            tocWrap.classList.toggle('sidebar-panel-active');
+          });
+        }
+      });
+      </script>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2025</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">TGG</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> 强力驱动
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  
+  <script color='0,0,255' opacity='0.5' zIndex='-1' count='170' src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/sidebar-nav.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
